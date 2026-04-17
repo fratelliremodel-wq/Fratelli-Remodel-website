@@ -68,10 +68,16 @@ export default function Hero() {
         </div>
 
         {/* Subheadline */}
-        <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
-          Clear communication, quality craftsmanship, and a remodeling
-          experience built on trust — from the first call to the final
-          walkthrough.
+        <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-5">
+          Licensed. Insured. Trusted. We help homeowners remodel with confidence
+          through clear communication, thoughtful planning, and quality
+          craftsmanship.
+        </p>
+
+        {/* Supporting line */}
+        <p className="text-white/40 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-12 italic">
+          Most homeowners don&apos;t just worry about how their remodel will
+          look — they worry about the experience. We focus on both.
         </p>
 
         {/* CTAs */}

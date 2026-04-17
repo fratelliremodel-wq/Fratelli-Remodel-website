@@ -1,7 +1,9 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
+import HowWeRemodel from "@/components/HowWeRemodel";
 import Services from "@/components/Services";
+import WhatGoesWrong from "@/components/WhatGoesWrong";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
@@ -19,7 +21,9 @@ export default function Home() {
       <Nav />
       <Hero />
       <TrustBar />
+      <HowWeRemodel />
       <Services />
+      <WhatGoesWrong />
       <WhyChooseUs />
       <Process />
       <Portfolio />
