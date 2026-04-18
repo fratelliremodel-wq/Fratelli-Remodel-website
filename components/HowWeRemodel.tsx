@@ -5,17 +5,19 @@ const pillars = [
     number: "01",
     heading: "We Listen.",
     body: "We take time to understand your home, your goals, and what matters most to you. Before any work begins, we want to know how you use the space, what's been frustrating about it, and what a successful project looks like to you.",
-    imageSrc: "/images/team-john-joe-bathroom.jpg",
-    imageAlt: "John and Joe on-site in a completed bathroom remodel",
+    imageSrc: "/images/team-john-joe-drywall.jpg",
+    imageAlt: "John and Joe — Fratelli Remodel team on the job",
     imageCaption: "On-site walkthrough before planning begins",
+    imagePosition: "object-top",
   },
   {
     number: "02",
     heading: "We Earn Trust.",
     body: "Clear communication, professional planning, and a process you can feel confident in. You'll know what's happening, what's coming next, and who to call when you have a question. We return calls. We follow through. Every time.",
-    imageSrc: "/images/progress-plumbing-rough-in.jpg",
-    imageAlt: "Waterproof membrane and plumbing rough-in visible in shower walls",
-    imageCaption: "Showing the work behind the walls before tile goes up",
+    imageSrc: "/images/progress-tadgh-framing.jpg",
+    imageAlt: "Framing, electrical, HVAC and plumbing visible during demo phase",
+    imageCaption: "The work behind the walls — framing, electrical, plumbing, all done right",
+    imagePosition: "object-center",
   },
   {
     number: "03",
@@ -24,6 +26,7 @@ const pillars = [
     imageSrc: "/images/portfolio-lisa-bath-pro.jpg",
     imageAlt: "Finished master bathroom with freestanding soaking tub and gold fixtures",
     imageCaption: "The finished result — craftsmanship that holds up",
+    imagePosition: "object-center",
   },
 ];
 
@@ -55,7 +58,7 @@ export default function HowWeRemodel() {
                   src={pillar.imageSrc}
                   alt={pillar.imageAlt}
                   fill
-                  className="object-cover"
+                  className={`object-cover ${pillar.imagePosition}`}
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 {/* Caption strip */}
