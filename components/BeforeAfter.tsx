@@ -18,46 +18,41 @@ interface Project {
   after: ProjectPhoto[];
 }
 
-// ─── Project data ─────────────────────────────────────────────────────────────
-// To add real photos:
-//   1. Drop files into /public/images/
-//   2. Replace null with the path, e.g. "/images/kitchen-before-1.jpg"
-// ─────────────────────────────────────────────────────────────────────────────
 const projects: Project[] = [
   {
-    title: "Kitchen Remodel",
+    title: "Kristen's Kitchen & Bath",
     location: "Las Vegas, NV",
     before: [
-      { src: null, caption: "Original kitchen — dated layout and finishes" },
-      { src: null, caption: "Existing cabinetry and countertops" },
+      { src: "/images/before-kristen-kitchen.jpg", caption: "Original kitchen — tile countertops, dated oak cabinets" },
+      { src: "/images/before-kristen-kitchen2.jpg", caption: "Sink side — original layout and finishes" },
+      { src: "/images/before-kristen-bath.jpg", caption: "Original bathroom — chrome fixtures, dated vanity" },
     ],
     progress: [
-      { src: null, caption: "Demo complete — walls opened" },
-      { src: null, caption: "Rough plumbing and electrical updated" },
-      { src: null, caption: "New cabinet boxes installed" },
-      { src: null, caption: "Countertop templating and tile work" },
+      { src: "/images/progress-kristen-kitchen-demo.jpg", caption: "Demo — cabinets out, flooring removal begins" },
+      { src: "/images/progress-kristen-floor-stripped.jpg", caption: "Floor tile removed down to slab — full gut" },
+      { src: "/images/progress-plumbing-rough-in.jpg", caption: "Waterproof membrane and new plumbing rough-in visible before tile" },
     ],
     after: [
-      { src: null, caption: "Finished kitchen — new layout and finishes" },
-      { src: null, caption: "Detail — countertops and hardware" },
+      { src: "/images/portfolio-kristen-kitchen.jpg", caption: "Finished kitchen — fluted island, quartzite countertop, dark hardwood" },
+      { src: "/images/portfolio-kristen-kitchen-doorway.jpg", caption: "View from entry — farmhouse sink, open to living room" },
+      { src: "/images/portfolio-kristen-bath.jpg", caption: "Finished bathroom — navy vanity, quartzite top, patterned floor tile" },
     ],
   },
   {
-    title: "Bathroom Remodel",
+    title: "Lisa's Full Home Remodel",
     location: "Las Vegas, NV",
     before: [
-      { src: null, caption: "Original bathroom — outdated fixtures and tile" },
-      { src: null, caption: "Existing shower and flooring" },
+      { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed" },
     ],
     progress: [
-      { src: null, caption: "Demo — tile and drywall removed" },
-      { src: null, caption: "Waterproof membrane installed behind walls" },
-      { src: null, caption: "New tile layout and setting" },
-      { src: null, caption: "Plumbing rough-in for new fixtures" },
+      { src: "/images/progress-lisa-kitchen-demo.jpg", caption: "Ceiling opened, flooring down to slab — full scope of work visible" },
+      { src: "/images/progress-lisa-kitchen-demo2.jpg", caption: "Demo in progress — wall opened, framing and electrical exposed" },
+      { src: "/images/progress-lisa-bath-demo.jpg", caption: "Master bath — floor removed, original tub exposed before full gut" },
     ],
     after: [
-      { src: null, caption: "Finished bathroom — clean and functional" },
-      { src: null, caption: "Detail — tile work and fixtures" },
+      { src: "/images/portfolio-lisa-bath-pro.jpg", caption: "Finished master bath — freestanding soaking tub, gold floor-mount filler" },
+      { src: "/images/portfolio-lisa-kitchen-wide.jpg", caption: "Finished kitchen — dual islands, quartz countertops, globe pendants" },
+      { src: "/images/portfolio-lisa-kitchen-detail.jpg", caption: "Kitchen detail — gold sink filler, marble countertop, marble backsplash" },
     ],
   },
 ];
@@ -88,7 +83,6 @@ function PhotoPlaceholder({ caption, gradient }: { caption: string; gradient: st
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
       </div>
-      {/* Caption */}
       <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-black/50">
         <p className="text-white/70 text-xs leading-snug">{caption}</p>
       </div>

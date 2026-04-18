@@ -1,51 +1,53 @@
+import Image from "next/image";
+
 const projects = [
   {
-    label: "Kitchen Remodel",
-    sub: "Full kitchen transformation",
-    gradient: "from-[#3D2B1F] to-[#5C3D2E]",
-  },
-  {
-    label: "Bathroom Remodel",
-    sub: "Master bath renovation",
-    gradient: "from-[#1F2D3D] to-[#2E4055]",
+    label: "Master Bath Remodel",
+    sub: "Freestanding tub · Gold fixtures",
+    src: "/images/portfolio-lisa-bath-pro.jpg",
     tall: true,
-  },
-  {
-    label: "Full Home Remodel",
-    sub: "Complete interior transformation",
-    gradient: "from-[#2B3D1F] to-[#3D5528]",
   },
   {
     label: "Kitchen Remodel",
-    sub: "Custom cabinetry & countertops",
-    gradient: "from-[#3D3020] to-[#5C4A30]",
-    tall: true,
+    sub: "Dual islands · Quartz countertops",
+    src: "/images/portfolio-lisa-kitchen-wide.jpg",
   },
   {
-    label: "Tile Installation",
-    sub: "Flooring & backsplash",
-    gradient: "from-[#2D1F3D] to-[#3F2C55]",
+    label: "Kitchen Remodel",
+    sub: "Fluted island · Dark hardwood",
+    src: "/images/portfolio-kristen-kitchen.jpg",
   },
   {
     label: "Bathroom Remodel",
-    sub: "Guest bathroom refresh",
-    gradient: "from-[#3D2020] to-[#5C3030]",
+    sub: "Patterned floor tile · Globe lights",
+    src: "/images/portfolio-kristen-bath.jpg",
   },
   {
-    label: "Flooring",
-    sub: "Hardwood installation",
-    gradient: "from-[#2B2D1F] to-[#3F4228]",
+    label: "Master Bath Remodel",
+    sub: "Freestanding tub · Travertine accent",
+    src: "/images/portfolio-jason-bath-tub.jpg",
     tall: true,
   },
   {
-    label: "Interior Painting",
-    sub: "Whole-home repaint",
-    gradient: "from-[#1F3D3D] to-[#285555]",
+    label: "Master Bath Remodel",
+    sub: "All-marble · Frameless glass",
+    src: "/images/portfolio-john-bath3.jpg",
   },
   {
-    label: "Full Home Remodel",
-    sub: "Older home renovation",
-    gradient: "from-[#3D2B1F] to-[#4F3A2A]",
+    label: "Kitchen Remodel",
+    sub: "Sage island · White quartz · Matte black",
+    src: "/images/portfolio-bob-kitchen2.jpg",
+  },
+  {
+    label: "Kitchen Remodel",
+    sub: "Two-tone cabinets · 3D tile backsplash",
+    src: "/images/portfolio-joe-kitchen.jpg",
+    tall: true,
+  },
+  {
+    label: "Bathroom Remodel",
+    sub: "Frameless shower · Brushed gold hardware",
+    src: "/images/portfolio-misc-bath-shower.jpg",
   },
 ];
 
@@ -64,8 +66,8 @@ export default function Portfolio() {
             </h2>
           </div>
           <p className="text-[#4A4A4A] text-sm leading-relaxed max-w-xs sm:text-right">
-            Real photos coming soon. Each tile below represents a completed
-            project — kitchens, bathrooms, full home remodels, and more.
+            A selection of completed projects — kitchens, bathrooms, and full
+            home remodels across Las Vegas.
           </p>
         </div>
 
@@ -78,40 +80,15 @@ export default function Portfolio() {
                 project.tall ? "row-span-2" : ""
               }`}
             >
-              {/* Gradient background */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${project.gradient} transition-transform duration-500 group-hover:scale-105`}
+              <Image
+                src={project.src}
+                alt={project.label}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
-
-              {/* Subtle texture */}
-              <div className="absolute inset-0 opacity-10">
-                <div
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='13' cy='13' r='1'/%3E%3C/g%3E%3C/svg%3E")`,
-                  }}
-                />
-              </div>
-
-              {/* Photo placeholder icon */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-30 transition-opacity">
-                <svg
-                  className="w-10 h-10 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                  />
-                </svg>
-              </div>
-
               {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
                 <p className="text-white text-sm font-semibold">{project.label}</p>
                 <p className="text-white/60 text-xs">{project.sub}</p>
               </div>

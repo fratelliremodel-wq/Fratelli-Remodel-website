@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const values = [
   "Communication first",
   "Quality behind the walls",
@@ -11,41 +13,24 @@ export default function About() {
     <section id="about" className="py-24 md:py-32 bg-[#FAFAF8]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Photo placeholder */}
+          {/* Team photo */}
           <div className="relative">
-            <div
-              className="aspect-[4/5] rounded-xl overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, #2D2218 0%, #3D3020 50%, #2D2218 100%)",
-              }}
-            >
-              {/* Placeholder content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white/25 gap-3">
-                <svg
-                  className="w-12 h-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                  />
-                </svg>
-                <p className="text-xs tracking-widest uppercase">Photo Coming Soon</p>
-              </div>
-
-              {/* Decorative accent */}
+            <div className="aspect-[4/5] rounded-xl overflow-hidden">
+              <Image
+                src="/images/team-john-joe-drywall.jpg"
+                alt="John and Joe — Fratelli Remodel team"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              {/* Name card overlay */}
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                  <p className="text-white/80 text-sm font-semibold">
-                    John Juadines
+                <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                  <p className="text-white/90 text-sm font-semibold">
+                    John &amp; Joe
                   </p>
-                  <p className="text-white/45 text-xs mt-0.5">
-                    Founder, Fratelli Remodel LLC
+                  <p className="text-white/55 text-xs mt-0.5">
+                    Fratelli Remodel LLC · Las Vegas, NV
                   </p>
                 </div>
               </div>
