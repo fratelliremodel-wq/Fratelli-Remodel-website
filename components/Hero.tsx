@@ -8,7 +8,7 @@ export default function Hero() {
         style={{
           backgroundImage: "url(/images/portfolio-lisa-kitchen-wide.jpg)",
           backgroundSize: "118%",
-          backgroundPosition: "22% 22%",
+          backgroundPosition: "30% 22%",
           backgroundRepeat: "no-repeat",
         }}
       />
