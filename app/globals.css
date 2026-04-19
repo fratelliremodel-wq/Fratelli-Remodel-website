@@ -21,12 +21,14 @@ html {
 }
 
 .hero-bg {
+  background-size: cover;
   background-position: 45% 15%;
 }
 
 @media (min-width: 768px) {
   .hero-bg {
-    background-position: 50% 15%;
+    background-size: 110%;
+    background-position: 48% 15%;
   }
 }
 
