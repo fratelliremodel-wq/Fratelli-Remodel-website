@@ -41,7 +41,8 @@ export default function Hero() {
 
         {/* Main headline */}
         <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-6">
-          Remodeling Done Right<span className="text-[#C4A882]"> in Las Vegas.</span>
+          Remodeling Done Right
+          <span className="block text-[#C4A882] mt-2">in Las Vegas.</span>
         </h1>
 
         {/* Subheadline */}
@@ -63,10 +64,6 @@ export default function Hero() {
           No pressure — just a conversation about your project.
         </p>
 
-        {/* Location line */}
-        <p className="text-white/25 text-xs mt-3 tracking-wide">
-          Serving homeowners throughout Las Vegas and surrounding areas.
-        </p>
       </div>
 
       {/* Scroll indicator */}
