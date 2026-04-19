@@ -13,7 +13,7 @@ export default function Hero() {
           priority
           className="object-cover object-[20%_20%]"
           sizes="150vw"
-          style={{ width: "150%", left: "-10%" }}
+          style={{ width: "150%", left: "-5%" }}
         />
       </div>
 
