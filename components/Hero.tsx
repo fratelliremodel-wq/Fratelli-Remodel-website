@@ -1,21 +1,17 @@
-import Image from "next/image";
-
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-      {/* Background photo — oversized to allow horizontal panning */}
-      <div className="absolute inset-0 overflow-hidden">
-        <Image
-          src="/images/portfolio-lisa-kitchen-wide.jpg"
-          alt="Luxury kitchen remodel by Fratelli Remodel — Las Vegas"
-          fill
-          priority
-          className="object-cover object-[50%_20%]"
-          sizes="170vw"
-          style={{ width: "170%", left: "-18%", right: "auto" }}
-        />
-      </div>
+      {/* Background photo */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url(/images/portfolio-lisa-kitchen-wide.jpg)",
+          backgroundSize: "140%",
+          backgroundPosition: "9% 20%",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/58" />
