@@ -5,9 +5,9 @@ const pillars = [
     number: "01",
     heading: "We Listen.",
     body: "We take time to understand your home, your goals, and what matters most to you. Before any work begins, we want to know how you use the space, what's been frustrating about it, and what a successful project looks like to you.",
-    imageSrc: "/images/team-john-joe-drywall.jpg",
-    imageAlt: "John and Joe — Fratelli Remodel team on the job",
-    imageCaption: "On-site walkthrough before planning begins",
+    imageSrc: "/images/team-client-finished-room.jpg",
+    imageAlt: "John and Joe with happy clients in their finished remodel",
+    imageCaption: "With clients at project completion — Las Vegas, NV",
     imagePosition: "object-top",
   },
   {
