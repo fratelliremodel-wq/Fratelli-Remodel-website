@@ -2,13 +2,24 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
+      <style>{`
+        .hero-bg {
+          background-size: cover;
+          background-position: 45% 15%;
+        }
+        @media (min-width: 768px) {
+          .hero-bg {
+            background-size: 115%;
+            background-position: 27% 18%;
+          }
+        }
+      `}</style>
+
       {/* Background photo */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hero-bg"
         style={{
           backgroundImage: "url(/images/portfolio-lisa-kitchen-wide.jpg)",
-          backgroundSize: "115%",
-          backgroundPosition: "27% 18%",
           backgroundRepeat: "no-repeat",
         }}
       />
