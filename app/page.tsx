@@ -8,7 +8,9 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
 import BeforeAfter from "@/components/BeforeAfter";
+import InstagramSection from "@/components/InstagramSection";
 import About from "@/components/About";
+import TrustSection from "@/components/TrustSection";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CTABanner from "@/components/CTABanner";
@@ -28,7 +30,9 @@ export default function Home() {
       <Process />
       <Portfolio />
       <BeforeAfter />
+      <InstagramSection />
       <About />
+      <TrustSection />
       <Testimonials />
       <FAQ />
       <CTABanner />
