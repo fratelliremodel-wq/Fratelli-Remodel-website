@@ -4,7 +4,7 @@ const pillars = [
   {
     number: "01",
     heading: "We Listen.",
-    body: "We take time to understand your home, your goals, and what matters most to you. Before any work begins, we want to know how you use the space, what's been frustrating about it, and what a successful project looks like to you.",
+    body: "We take the time to understand your home, your goals, and what matters most before anything begins.",
     imageSrc: "/images/team-client-finished-room.jpg",
     imageAlt: "John and Joe with happy clients in their finished remodel",
     imageCaption: "With clients at project completion — Las Vegas, NV",
@@ -13,7 +13,7 @@ const pillars = [
   {
     number: "02",
     heading: "We Earn Trust.",
-    body: "Clear communication, professional planning, and a process you can feel confident in. You'll know what's happening, what's coming next, and who to call when you have a question. We return calls. We follow through. Every time.",
+    body: "Clear communication, realistic expectations, and a professional process from start to finish.",
     imageSrc: "/images/progress-tadgh-framing.jpg",
     imageAlt: "Framing, electrical, HVAC and plumbing visible during demo phase",
     imageCaption: "The work behind the walls — framing, electrical, plumbing, all done right",
@@ -22,7 +22,7 @@ const pillars = [
   {
     number: "03",
     heading: "We Build It Right.",
-    body: "Attention to detail not just in the finishes, but behind the walls where it matters most. Waterproofing. Framing. Plumbing. The work you'll never see is the work that determines whether everything holds up five years from now.",
+    body: "From behind-the-walls work to final finishes, we focus on quality where it matters most.",
     imageSrc: "/images/portfolio-lisa-bath-pro.jpg",
     imageAlt: "Finished master bathroom with freestanding soaking tub and gold fixtures",
     imageCaption: "The finished result — craftsmanship that holds up",

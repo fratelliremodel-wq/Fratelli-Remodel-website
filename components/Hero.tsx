@@ -36,9 +36,15 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-14">
-          Licensed, insured, and trusted by Las Vegas homeowners for quality
-          craftsmanship and clear communication from start to finish.
+        <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-4">
+          Licensed. Insured. Trusted. We help homeowners remodel with confidence
+          through clear communication, thoughtful planning, and quality
+          craftsmanship.
+        </p>
+
+        {/* Location line */}
+        <p className="text-white/35 text-sm mb-14 tracking-wide">
+          Serving homeowners throughout Las Vegas and surrounding areas.
         </p>
 
         {/* Primary CTA */}
@@ -46,7 +52,7 @@ export default function Hero() {
           href="#contact"
           className="inline-block px-10 py-4 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors font-medium"
         >
-          Schedule a Consultation
+          Start the Conversation
         </a>
       </div>
 

@@ -1,7 +1,7 @@
 export default function CTABanner() {
   return (
     <section
-      className="py-20 md:py-24 relative overflow-hidden"
+      className="py-24 md:py-28 relative overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, #8B6F47 0%, #7A6040 50%, #6B5235 100%)",
@@ -15,32 +15,23 @@ export default function CTABanner() {
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <p className="text-white/60 text-xs tracking-[0.3em] uppercase font-medium mb-5">
-          Ready to get started?
+      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+        <p className="text-white/50 text-xs tracking-[0.3em] uppercase font-medium mb-5">
+          Ready to Begin
         </p>
-        <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl lg:text-6xl text-white font-bold leading-tight mb-6">
-          Ready to Remodel Right?
+        <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-white font-bold leading-tight mb-6">
+          Start Your Project With Confidence
         </h2>
-        <p className="text-white/75 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10">
-          Let's have a conversation about your project. No pressure — just a
-          real discussion about what you're looking for and whether we're the
-          right fit.
+        <p className="text-white/70 text-lg max-w-xl mx-auto leading-relaxed mb-10">
+          If you&apos;re planning a remodel and want a clear, professional
+          experience from start to finish, we&apos;d love to connect.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#contact"
-            className="w-full sm:w-auto px-8 py-4 bg-white text-[#8B6F47] text-sm font-semibold tracking-wide rounded hover:bg-[#F2EDE6] transition-colors"
-          >
-            Schedule a Consultation
-          </a>
-          <a
-            href="tel:7023247949"
-            className="w-full sm:w-auto px-8 py-4 border border-white/30 text-white text-sm tracking-wide rounded hover:border-white/60 hover:bg-white/5 transition-all"
-          >
-            Call (702) 324-7949
-          </a>
-        </div>
+        <a
+          href="#contact"
+          className="inline-block px-10 py-4 bg-white text-[#8B6F47] text-sm font-semibold tracking-wide rounded hover:bg-[#F2EDE6] transition-colors"
+        >
+          Start the Conversation
+        </a>
       </div>
     </section>
   );
