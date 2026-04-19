@@ -35,15 +35,10 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-4">
+        <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10">
           Licensed. Insured. Trusted. We help homeowners remodel with confidence
           through clear communication, thoughtful planning, and quality
           craftsmanship.
-        </p>
-
-        {/* Location line */}
-        <p className="text-white/35 text-sm mb-14 tracking-wide">
-          Serving homeowners throughout Las Vegas and surrounding areas.
         </p>
 
         {/* Primary CTA */}
