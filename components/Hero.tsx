@@ -10,7 +10,7 @@ export default function Hero() {
         alt="Luxury kitchen remodel by Fratelli Remodel — Las Vegas"
         fill
         priority
-        className="object-cover object-[40%_20%]"
+        className="object-cover object-[33%_20%]"
         sizes="100vw"
       />
 
