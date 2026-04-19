@@ -11,9 +11,9 @@ export default function Hero() {
           alt="Luxury kitchen remodel by Fratelli Remodel — Las Vegas"
           fill
           priority
-          className="object-cover object-[20%_20%]"
-          sizes="150vw"
-          style={{ width: "150%", left: "-5%" }}
+          className="object-cover object-[50%_20%]"
+          sizes="170vw"
+          style={{ width: "170%", left: "-18%", right: "auto" }}
         />
       </div>
 
