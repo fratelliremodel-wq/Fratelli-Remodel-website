@@ -20,17 +20,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.hero-bg {
-  background-size: cover;
-  background-position: 45% 15%;
-}
-
-@media (min-width: 768px) {
-  .hero-bg {
-    background-size: 110%;
-    background-position: 52% 15%;
-  }
-}
 
 body {
   background-color: #FAFAF8;

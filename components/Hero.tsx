@@ -2,6 +2,19 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
+      <style>{`
+        .hero-bg {
+          background-size: cover;
+          background-position: 45% 15%;
+        }
+        @media (min-width: 768px) {
+          .hero-bg {
+            background-size: 110%;
+            background-position: 52% 15%;
+          }
+        }
+      `}</style>
+
       {/* Background photo */}
       <div
         className="absolute inset-0 hero-bg"
