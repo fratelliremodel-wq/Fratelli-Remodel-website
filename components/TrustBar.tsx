@@ -11,7 +11,7 @@ const items = [
       </svg>
     ),
     label: "Licensed & Insured",
-    sub: "Nevada State Licensed General Contractor",
+    sub: "License #0091612 · Nevada General Contractor",
   },
   {
     icon: (

@@ -40,16 +40,14 @@ export default function Hero() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center pt-32 pb-40">
 
         {/* Main headline */}
-        <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-8">
-          Remodeling Done Right
-          <span className="block text-[#C4A882] mt-3">for homes in Las Vegas.</span>
+        <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-6">
+          Remodeling Done Right<span className="text-[#C4A882]"> in Las Vegas.</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10">
           Licensed. Insured. Trusted. We help homeowners remodel with confidence
-          through clear communication, thoughtful planning, and quality
-          craftsmanship.
+          through clear communication and quality craftsmanship.
         </p>
 
         {/* Primary CTA */}
@@ -59,6 +57,16 @@ export default function Hero() {
         >
           Start the Conversation
         </a>
+
+        {/* No pressure line */}
+        <p className="text-white/35 text-sm mt-4 tracking-wide">
+          No pressure — just a conversation about your project.
+        </p>
+
+        {/* Location line */}
+        <p className="text-white/25 text-xs mt-3 tracking-wide">
+          Serving homeowners throughout Las Vegas and surrounding areas.
+        </p>
       </div>
 
       {/* Scroll indicator */}

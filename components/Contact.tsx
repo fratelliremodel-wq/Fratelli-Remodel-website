@@ -49,11 +49,14 @@ export default function Contact() {
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-[#1A1A1A] font-bold leading-tight mb-5">
             Start a Conversation
           </h2>
-          <p className="text-[#4A4A4A] text-lg leading-relaxed mb-6">
+          <p className="text-[#4A4A4A] text-lg leading-relaxed mb-3">
             We focus on thoughtful, high-quality remodels — not small repairs or
             quick fixes. Most of our projects involve kitchens, bathrooms, or
             full home remodels where planning, communication, and craftsmanship
             matter.
+          </p>
+          <p className="text-[#8B6F47] text-sm font-medium leading-relaxed mb-6">
+            We&apos;ll review your project and reach out to see if we&apos;re a good fit to move forward together.
           </p>
           {/* Highlighted note */}
           <div className="flex gap-3 p-4 bg-white border border-[#E5DDD4] rounded-xl">
