@@ -30,8 +30,8 @@ export default function Hero() {
 
         {/* Main headline */}
         <h1 className="font-[family-name:var(--font-playfair)] text-5xl sm:text-6xl lg:text-7xl text-white font-bold leading-[1.1] tracking-tight mb-8">
-          Remodeling Done Right
-          <span className="block text-[#C4A882] mt-3">in Las Vegas.</span>
+          Remodeling Done
+          <span className="block text-[#C4A882] mt-3">Right in Las Vegas.</span>
         </h1>
 
         {/* Subheadline */}
