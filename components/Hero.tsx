@@ -7,8 +7,8 @@ export default function Hero() {
         className="absolute inset-0"
         style={{
           backgroundImage: "url(/images/portfolio-lisa-kitchen-wide.jpg)",
-          backgroundSize: "118%",
-          backgroundPosition: "30% 22%",
+          backgroundSize: "128%",
+          backgroundPosition: "30% 12%",
           backgroundRepeat: "no-repeat",
         }}
       />
