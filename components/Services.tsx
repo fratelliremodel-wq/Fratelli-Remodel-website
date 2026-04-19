@@ -42,32 +42,22 @@ const services = [
   {
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
       </svg>
     ),
-    title: "Drywall",
+    title: "Framing & Drywall",
     description:
-      "Clean, smooth finishes and structural repairs done with care — because walls that look right after paint start with quality workmanship.",
+      "Structural framing, repairs, and smooth drywall finishes done right — because walls that perform and look right after paint start well before the first coat.",
   },
   {
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l5.654-4.655m5.546-4.175a2.25 2.25 0 013.182 0l1.5 1.5a2.25 2.25 0 010 3.182l-1.5 1.5a2.25 2.25 0 01-3.182 0l-1.5-1.5a2.25 2.25 0 010-3.182l1.5-1.5z" />
       </svg>
     ),
-    title: "Interior Painting",
+    title: "& Everything In Between",
     description:
-      "Professional prep and clean application that elevates every room — the finishing touch that ties everything together.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-      </svg>
-    ),
-    title: "Tile Installation",
-    description:
-      "Precise layout, proper substrate prep, and quality setting materials for tile work that holds up and looks sharp for decades.",
+      "Interior painting, tile installation, trim carpentry, door and window installation, texture work, and more. We're licensed and experienced across all interior trades — if it's inside your home, we can handle it.",
   },
 ];
 
@@ -95,11 +85,7 @@ export default function Services() {
           {services.map((service, i) => (
             <div
               key={service.title}
-              className={`bg-white p-8 group hover:bg-[#FAFAF8] transition-colors ${
-                i === services.length - 1 && services.length % 3 !== 0
-                  ? "sm:col-span-2 lg:col-span-1"
-                  : ""
-              }`}
+              className="bg-white p-8 group hover:bg-[#FAFAF8] transition-colors"
             >
               <div className="text-[#8B6F47] mb-5 group-hover:scale-105 transition-transform origin-left">
                 {service.icon}
