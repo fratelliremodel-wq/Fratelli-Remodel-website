@@ -17,10 +17,10 @@ export default function About() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-xl overflow-hidden">
               <Image
-                src="/images/team-john-joe-drywall.jpg"
-                alt="John and Joe — Fratelli Remodel team"
+                src="/images/team-john-joe.jpg"
+                alt="John and Joe — Fratelli Remodel"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Name card overlay */}
