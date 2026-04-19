@@ -8,7 +8,7 @@ const pillars = [
     imageSrc: "/images/team-client-finished-room.jpg",
     imageAlt: "John and Joe with happy clients in their finished remodel",
     imageCaption: "With clients at project completion — Las Vegas, NV",
-    imagePosition: "object-top",
+    imagePosition: "object-center",
   },
   {
     number: "02",
