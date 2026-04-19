@@ -29,9 +29,9 @@ export default function Hero() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center pt-32 pb-40">
 
         {/* Main headline */}
-        <h1 className="font-[family-name:var(--font-playfair)] text-5xl sm:text-6xl lg:text-7xl text-white font-bold leading-[1.1] tracking-tight mb-8">
-          Remodeling Done
-          <span className="block text-[#C4A882] mt-3">Right in Las Vegas.</span>
+        <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-8">
+          Remodeling Done Right
+          <span className="block text-[#C4A882] mt-3">for homes in Las Vegas.</span>
         </h1>
 
         {/* Subheadline */}
