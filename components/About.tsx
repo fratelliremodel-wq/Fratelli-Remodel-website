@@ -20,7 +20,7 @@ export default function About() {
                 src="/images/team-john-joe.jpg"
                 alt="John and Joe — Fratelli Remodel"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-[50%_30%]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Name card overlay */}
