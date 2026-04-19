@@ -15,12 +15,12 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Team photo */}
           <div className="relative">
-            <div className="aspect-[4/4] rounded-xl overflow-hidden">
+            <div className="aspect-[4/3] rounded-xl overflow-hidden">
               <Image
                 src="/images/team-john-joe.jpg"
                 alt="John and Joe — Fratelli Remodel"
                 fill
-                className="object-cover object-top scale-[1.3] origin-top"
+                className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Name card overlay */}
