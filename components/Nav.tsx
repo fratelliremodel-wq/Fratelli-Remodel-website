@@ -33,14 +33,14 @@ export default function Nav() {
         {/* Logo */}
         <a href="#" className="flex flex-col leading-none group">
           <span
-            className={`font-[family-name:var(--font-playfair)] text-xl font-bold tracking-widest transition-colors ${
+            className={`font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-widest transition-colors ${
               scrolled ? "text-[#1A1A1A]" : "text-white"
             }`}
           >
             FRATELLI
           </span>
           <span
-            className={`text-[9px] tracking-[0.35em] uppercase font-medium transition-colors ${
+            className={`text-[11px] tracking-[0.35em] uppercase font-medium transition-colors ${
               scrolled ? "text-[#8B6F47]" : "text-[#C4A882]"
             }`}
           >
