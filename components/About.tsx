@@ -20,12 +20,12 @@ export default function About() {
                 src="/images/team-john-joe.jpg"
                 alt="John and Joe — Fratelli Remodel"
                 fill
-                className="object-cover object-[50%_30%]"
+                className="object-cover object-[50%_8%]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Name card overlay */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+              <div className="absolute bottom-0 left-0 right-0">
+                <div className="bg-black/50 backdrop-blur-sm px-6 py-4 border-t border-white/10">
                   <p className="text-white/90 text-sm font-semibold">
                     John &amp; Joe
                   </p>
