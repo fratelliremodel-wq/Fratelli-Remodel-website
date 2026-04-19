@@ -17,6 +17,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.svg",
+  },
   title: "Fratelli Remodel | Las Vegas General Contractor — Licensed & Insured",
   description:
     "Fratelli Remodel is a licensed and insured Las Vegas general contractor specializing in kitchen remodels, bathroom remodels, and full home remodels. Clear communication, quality craftsmanship.",
