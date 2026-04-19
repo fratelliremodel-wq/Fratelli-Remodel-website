@@ -1,48 +1,7 @@
-import Image from "next/image";
-
-const feedPhotos = [
-  {
-    src: "/images/before-kristen-kitchen.jpg",
-    caption: "Before — dated kitchen, original layout",
-    tag: "Before",
-  },
-  {
-    src: "/images/progress-kristen-kitchen-demo.jpg",
-    caption: "Demo day — cabinets out, full gut begins",
-    tag: "Progress",
-  },
-  {
-    src: "/images/portfolio-kristen-kitchen.jpg",
-    caption: "After — fluted island, quartzite countertop, dark hardwood",
-    tag: "After",
-  },
-  {
-    src: "/images/progress-tadgh-framing.jpg",
-    caption: "Framing, electrical & plumbing — the work behind the walls",
-    tag: "Progress",
-  },
-  {
-    src: "/images/portfolio-lisa-bath-pro.jpg",
-    caption: "After — freestanding soaking tub, floor-mount gold filler",
-    tag: "After",
-  },
-  {
-    src: "/images/progress-plumbing-rough-in.jpg",
-    caption: "Waterproof membrane and plumbing rough-in before tile",
-    tag: "Progress",
-  },
-];
-
-const tagColors: Record<string, string> = {
-  Before: "bg-[#3D2B1F] text-[#C4A882]",
-  Progress: "bg-[#2A2A1A] text-[#C4C482]",
-  After: "bg-[#1A2D1F] text-[#82C4A0]",
-};
-
 export default function InstagramSection() {
   return (
     <>
-      {/* From Our Work grid */}
+      {/* Live Instagram feed */}
       <section className="py-24 md:py-32 bg-[#1A1A1A]">
         <div className="max-w-6xl mx-auto px-6">
 
@@ -56,8 +15,7 @@ export default function InstagramSection() {
                 Before. During. After.
               </h2>
               <p className="text-white/50 text-lg leading-relaxed max-w-xl">
-                Follow along as we document real projects from start to finish —
-                demo, framing, finishes, and everything in between.
+                We don&apos;t just show finished spaces — we show the process behind them.
               </p>
             </div>
             <a
@@ -73,29 +31,10 @@ export default function InstagramSection() {
             </a>
           </div>
 
-          {/* Photo grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {feedPhotos.map((photo, i) => (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden group">
-                <Image
-                  src={photo.src}
-                  alt={photo.caption}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                {/* Tag badge */}
-                <div className="absolute top-3 left-3">
-                  <span className={`text-[10px] font-semibold tracking-[0.15em] uppercase px-2 py-1 rounded-full ${tagColors[photo.tag]}`}>
-                    {photo.tag}
-                  </span>
-                </div>
-                {/* Caption on hover */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
-                  <p className="text-white/90 text-xs leading-snug p-4">{photo.caption}</p>
-                </div>
-              </div>
-            ))}
+          {/* Behold live feed */}
+          <div className="[&_behold-widget]:rounded-xl [&_behold-widget]:overflow-hidden">
+            {/* @ts-expect-error custom element */}
+            <behold-widget feed-id="f6ZOr5YFvVc0DaNn5V8m"></behold-widget>
           </div>
 
           {/* View more CTA */}
