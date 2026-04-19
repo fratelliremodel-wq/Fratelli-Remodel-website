@@ -4,11 +4,10 @@ export default function Hero() {
 
       {/* Background photo */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hero-bg"
         style={{
           backgroundImage: "url(/images/portfolio-lisa-kitchen-wide.jpg)",
           backgroundSize: "cover",
-          backgroundPosition: "45% 15%",
           backgroundRepeat: "no-repeat",
         }}
       />
