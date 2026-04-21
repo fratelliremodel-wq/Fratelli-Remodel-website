@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     quote:
-      "I hired John for two bathroom remodels. When I called, John answered! He was on time and gave me a detailed estimate with allowances. John and Joe did all the work themselves, which was important to me. Their attention to detail was impeccable. I could not be more pleased with the results. I would absolutely hire them again.",
+      "If you found this review, you need look no further….. just stop and call these gentlemen! John and Joe are the real deal! I hired John for two bathroom remodels. When I called, John answered! He was on time and gave me a detailed estimate with allowances. John and Joe did all the work themselves, which was important to me. Their attention to detail was impeccable. I could not be more pleased with the results. I would absolutely hire them again.",
     name: "Cindy Rippley",
     project: "Two Bathroom Remodels",
     location: "Las Vegas, NV",
