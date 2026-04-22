@@ -47,9 +47,9 @@ const projects: Project[] = [
       { src: "/images/before-lisa-bath.jpg", caption: "Master bath before — original jacuzzi tub, glass block windows, subfloor exposed" },
     ],
     progress: [
-      { src: "/images/progress-lisa-kitchen-demo.jpg", caption: "Ceiling opened, flooring down to slab — full scope of work visible" },
-      { src: "/images/progress-lisa-kitchen-demo2.jpg", caption: "Demo in progress — wall opened, framing and electrical exposed" },
-      { src: "/images/progress-lisa-bath-demo.jpg", caption: "Master bath — floor removed, original tub exposed before full gut" },
+      { src: "/images/progress-lisa-1.jpg", caption: "Full gut — framing exposed, flooring stripped, mold remediation complete" },
+      { src: "/images/progress-lisa-2.jpg", caption: "Master bath tile in progress — large format marble tile being set" },
+      { src: "/images/progress-lisa-3.jpg", caption: "Demo day — John and Joe demoing the master bath tub platform" },
     ],
     after: [
       { src: "/images/portfolio-lisa-bath-pro.jpg", caption: "Finished master bath — freestanding soaking tub, gold floor-mount filler" },
