@@ -50,7 +50,7 @@ const projects: Project[] = [
     ],
     progress: [
       { src: "/images/progress-lisa-1.jpg", caption: "Full gut — framing exposed, flooring stripped, mold remediation complete" },
-      { src: "/images/progress-lisa-2.jpg", caption: "Master bath tile in progress — large format marble tile being set", objectFit: "contain" },
+      { src: "/images/progress-lisa-2.jpg", caption: "Master bath tile in progress — large format marble tile being set" },
       { src: "/images/progress-lisa-3.jpg", caption: "Demo day — John and Joe demoing the master bath tub platform" },
     ],
     after: [
