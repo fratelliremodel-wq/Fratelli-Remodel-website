@@ -8,6 +8,7 @@ type Stage = "before" | "progress" | "after";
 interface ProjectPhoto {
   src: string | null;
   caption: string;
+  objectPosition?: string;
 }
 
 interface Project {
@@ -42,7 +43,8 @@ const projects: Project[] = [
     title: "Lisa's Full Home Remodel",
     location: "Las Vegas, NV",
     before: [
-      { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed" },
+      { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed", objectPosition: "50% 20%" },
+      { src: "/images/before-lisa-bath.jpg", caption: "Master bath before — original jacuzzi tub, glass block windows, subfloor exposed" },
     ],
     progress: [
       { src: "/images/progress-lisa-kitchen-demo.jpg", caption: "Ceiling opened, flooring down to slab — full scope of work visible" },
@@ -90,10 +92,10 @@ function PhotoPlaceholder({ caption, gradient }: { caption: string; gradient: st
   );
 }
 
-function PhotoReal({ src, caption }: { src: string; caption: string }) {
+function PhotoReal({ src, caption, objectPosition = "center" }: { src: string; caption: string; objectPosition?: string }) {
   return (
     <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-      <Image src={src} alt={caption} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+      <Image src={src} alt={caption} fill className="object-cover" style={{ objectPosition }} sizes="(max-width: 768px) 100vw, 33vw" />
       <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-black/50">
         <p className="text-white/80 text-xs leading-snug">{caption}</p>
       </div>
@@ -180,7 +182,7 @@ export default function BeforeAfter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {photos.map((photo, i) =>
             photo.src ? (
-              <PhotoReal key={i} src={photo.src} caption={photo.caption} />
+              <PhotoReal key={i} src={photo.src} caption={photo.caption} objectPosition={photo.objectPosition} />
             ) : (
               <PhotoPlaceholder
                 key={i}
