@@ -9,6 +9,7 @@ interface ProjectPhoto {
   src: string | null;
   caption: string;
   objectPosition?: string;
+  objectFit?: "cover" | "contain";
 }
 
 interface Project {
@@ -45,16 +46,17 @@ const projects: Project[] = [
     before: [
       { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed", objectPosition: "50% 20%" },
       { src: "/images/before-lisa-bath.jpg", caption: "Master bath before — original jacuzzi tub, glass block windows, subfloor exposed" },
+      { src: "/images/before-lisa-1.jpg", caption: "Original master shower — dated tile, brass frame, original layout before gut" },
     ],
     progress: [
       { src: "/images/progress-lisa-1.jpg", caption: "Full gut — framing exposed, flooring stripped, mold remediation complete" },
-      { src: "/images/progress-lisa-2.jpg", caption: "Master bath tile in progress — large format marble tile being set" },
+      { src: "/images/progress-lisa-2.jpg", caption: "Master bath tile in progress — large format marble tile being set", objectFit: "contain" },
       { src: "/images/progress-lisa-3.jpg", caption: "Demo day — John and Joe demoing the master bath tub platform" },
     ],
     after: [
       { src: "/images/portfolio-lisa-bath-pro.jpg", caption: "Finished master bath — freestanding soaking tub, gold floor-mount filler" },
       { src: "/images/portfolio-lisa-kitchen-wide.jpg", caption: "Finished kitchen — dual islands, quartz countertops, globe pendants" },
-      { src: "/images/portfolio-lisa-kitchen-detail.jpg", caption: "Kitchen detail — gold sink filler, marble countertop, marble backsplash" },
+      { src: "/images/after-lisa-1.jpg", caption: "Finished master shower — marble tile, gold fixtures, mosaic floor" },
     ],
   },
 ];
@@ -92,10 +94,10 @@ function PhotoPlaceholder({ caption, gradient }: { caption: string; gradient: st
   );
 }
 
-function PhotoReal({ src, caption, objectPosition = "center" }: { src: string; caption: string; objectPosition?: string }) {
+function PhotoReal({ src, caption, objectPosition = "center", objectFit = "cover" }: { src: string; caption: string; objectPosition?: string; objectFit?: "cover" | "contain" }) {
   return (
-    <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-      <Image src={src} alt={caption} fill className="object-cover" style={{ objectPosition }} sizes="(max-width: 768px) 100vw, 33vw" />
+    <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[#1A1A1A]">
+      <Image src={src} alt={caption} fill className={objectFit === "contain" ? "object-contain" : "object-cover"} style={{ objectPosition }} sizes="(max-width: 768px) 100vw, 33vw" />
       <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-black/50">
         <p className="text-white/80 text-xs leading-snug">{caption}</p>
       </div>
@@ -182,7 +184,7 @@ export default function BeforeAfter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {photos.map((photo, i) =>
             photo.src ? (
-              <PhotoReal key={i} src={photo.src} caption={photo.caption} objectPosition={photo.objectPosition} />
+              <PhotoReal key={i} src={photo.src} caption={photo.caption} objectPosition={photo.objectPosition} objectFit={photo.objectFit} />
             ) : (
               <PhotoPlaceholder
                 key={i}
