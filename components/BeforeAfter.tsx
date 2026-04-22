@@ -22,11 +22,11 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Kristen's Kitchen & Bath",
+    title: "Kristen's Full Home Remodel",
     location: "Las Vegas, NV",
     before: [
-      { src: "/images/before-kristen-kitchen.jpg", caption: "Original kitchen — tile countertops, dated oak cabinets" },
-      { src: "/images/before-kristen-kitchen2.jpg", caption: "Sink side — original layout and finishes" },
+      { src: "/images/before-kristen-1.jpg", caption: "Original kitchen — dated oak cabinets, tile countertops, original layout" },
+      { src: "/images/before-kristen-2.jpg", caption: "Wall opened between kitchen and living room — original layout before reconfiguration" },
       { src: "/images/before-kristen-bath.jpg", caption: "Original bathroom — chrome fixtures, dated vanity" },
     ],
     progress: [
