@@ -44,7 +44,7 @@ const projects: Project[] = [
     title: "Lisa's Full Home Remodel",
     location: "Las Vegas, NV",
     before: [
-      { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed", objectPosition: "50% 20%" },
+      { src: "/images/before-lisa-kitchen.jpg", caption: "Kitchen during early demo — original cabinets still in place, flooring removed", objectPosition: "50% 42%" },
       { src: "/images/before-lisa-bath.jpg", caption: "Master bath before — original jacuzzi tub, glass block windows, subfloor exposed" },
       { src: "/images/before-lisa-1.jpg", caption: "Original master shower — dated tile, brass frame, original layout before gut" },
     ],
