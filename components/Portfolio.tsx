@@ -24,19 +24,8 @@ const projects = [
   },
   {
     label: "Master Bath Remodel",
-    sub: "Freestanding tub · Travertine accent",
-    src: "/images/portfolio-jason-bath-tub.jpg",
-    tall: true,
-  },
-  {
-    label: "Master Bath Remodel",
     sub: "All-marble · Frameless glass",
     src: "/images/portfolio-john-bath3.jpg",
-  },
-  {
-    label: "Kitchen Remodel",
-    sub: "Sage island · White quartz · Matte black",
-    src: "/images/portfolio-bob-kitchen2.jpg",
   },
   {
     label: "Kitchen Remodel",
@@ -45,9 +34,20 @@ const projects = [
     tall: true,
   },
   {
+    label: "Kitchen Remodel",
+    sub: "Sage island · White quartz · Matte black",
+    src: "/images/portfolio-bob-kitchen2.jpg",
+  },
+  {
     label: "Bathroom Remodel",
     sub: "Frameless shower · Brushed gold hardware",
     src: "/images/portfolio-misc-bath-shower.jpg",
+    tall: true,
+  },
+  {
+    label: "Kitchen Remodel",
+    sub: "White shaker cabinets · Butcher block · Farmhouse sink",
+    src: "/images/portfolio-mom-kitchen.jpg",
   },
 ];
 
