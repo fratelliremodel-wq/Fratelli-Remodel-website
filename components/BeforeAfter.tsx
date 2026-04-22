@@ -28,9 +28,9 @@ const projects: Project[] = [
       { src: "/images/before-kristen-bath.jpg", caption: "Original bathroom — chrome fixtures, dated vanity" },
     ],
     progress: [
-      { src: "/images/progress-kristen-kitchen-demo.jpg", caption: "Demo — cabinets out, flooring removal begins" },
-      { src: "/images/progress-kristen-floor-stripped.jpg", caption: "Floor tile removed down to slab — full gut" },
-      { src: "/images/progress-plumbing-rough-in.jpg", caption: "Waterproof membrane and new plumbing rough-in visible before tile" },
+      { src: "/images/progress-kristen-1.jpg", caption: "Bathroom tile in progress — wall set, spacers in place" },
+      { src: "/images/progress-kristen-2.jpg", caption: "Wall opened for new kitchen pass-through — framing and electrical rough-in" },
+      { src: "/images/progress-kristen-3.jpg", caption: "Full kitchen gut — flooring stripped to slab, island framing removed" },
     ],
     after: [
       { src: "/images/portfolio-kristen-kitchen.jpg", caption: "Finished kitchen — fluted island, quartzite countertop, dark hardwood" },
