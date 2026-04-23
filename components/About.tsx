@@ -39,7 +39,7 @@ export default function About() {
               <div className="absolute bottom-0 left-0 right-0">
                 <div className="bg-black/50 backdrop-blur-sm px-6 py-4 border-t border-white/10">
                   <p className="text-white/90 text-sm font-semibold">John &amp; Joe</p>
-                  <p className="text-white/55 text-xs mt-0.5">Fratelli Remodel LLC · Las Vegas, NV</p>
+                  <p className="text-white/55 text-xs mt-0.5">Founders, Fratelli Remodel · Las Vegas, NV</p>
                 </div>
               </div>
             </div>
@@ -52,19 +52,20 @@ export default function About() {
               Who We Are
             </p>
             <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-[#1A1A1A] font-bold leading-tight mb-8">
-              Built on Craftsmanship.<br />Designed for a Better Experience.
+              Built on Craftsmanship.<br />Built for a Better Remodeling Experience.
             </h2>
 
             <div className="space-y-5 text-[#4A4A4A] leading-relaxed mb-8">
               <p>
                 For most homeowners, remodeling isn&apos;t just about how the finished space will look — it&apos;s about how the entire process will feel.
               </p>
-              <div className="space-y-2 pl-4 border-l-2 border-[#8B6F47]/30">
-                <p>Will it be organized?</p>
-                <p>Will communication be clear?</p>
-                <p>Will the work actually be done right?</p>
+              <div className="space-y-4 pl-4 border-l-2 border-[#8B6F47]/40">
+                <p className="font-medium text-[#2A2A2A]">Will it be organized?</p>
+                <p className="font-medium text-[#2A2A2A]">Will communication be clear?</p>
+                <p className="font-medium text-[#2A2A2A]">Will the work actually be done right?</p>
               </div>
               <p>At Fratelli Remodel, that&apos;s exactly what we focus on.</p>
+              <p className="text-[#4A4A4A]/70 italic">Because the process matters just as much as the result.</p>
             </div>
 
             {/* Story teaser */}
@@ -73,7 +74,7 @@ export default function About() {
                 Our Story
               </p>
               <p className="text-[#4A4A4A] leading-relaxed">
-                Fratelli Remodel was built through experience, but more importantly, through a shared belief that homeowners deserve a better remodeling experience.
+                Fratelli Remodel was built from experience — but more importantly, from a belief that homeowners deserve a better remodeling experience.
               </p>
             </div>
 
@@ -82,7 +83,7 @@ export default function About() {
               onClick={() => setExpanded(!expanded)}
               className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-[#8B6F47] text-[#8B6F47] text-sm font-medium tracking-wide rounded hover:bg-[#8B6F47] hover:text-white transition-all duration-200"
             >
-              {expanded ? "Show Less" : "Read Our Story"}
+              {expanded ? "Show Less" : "Read the Full Story"}
               <svg
                 className={`w-4 h-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
                 fill="none"
