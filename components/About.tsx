@@ -115,7 +115,7 @@ export default function About() {
               </div>
 
               {/* John's story */}
-              <div className="space-y-5 text-[#4A4A4A] leading-relaxed mb-14">
+              <div className="space-y-6 text-[#4A4A4A] leading-relaxed mb-14">
                 <p>
                   John Juadines was introduced to construction early, working alongside his grandfather and uncle in his early twenties. That foundation instilled a respect for craftsmanship and doing things the right way from the start.
                 </p>
@@ -123,15 +123,18 @@ export default function About() {
                   His path then took a different direction. After earning a degree in biology and working as an orthodontic assistant, John developed a high level of attention to detail — the kind that requires precision, patience, and care in every small decision.
                 </p>
                 <p>
-                  Later, as a CrossFit gym owner, he spent years working closely with people — listening, guiding, and helping them through challenges. That experience shaped how he communicates today: with clarity, empathy, and a genuine focus on what matters most to the client.
+                  Later, as a CrossFit gym owner, he spent years working closely with people — listening, guiding, and helping them through challenges.
+                </p>
+                <p>
+                  That experience shaped how he communicates today: with clarity, empathy, and a genuine focus on what matters most to the client.
                 </p>
                 <p>
                   When the pandemic hit, John returned to hands-on construction through his business, Farmhouse Handyman. What started as a way to support his family quickly reignited a deeper passion for building.
                 </p>
-                <p>
+                <p className="font-medium text-[#2A2A2A] pt-1">
                   But more importantly, it revealed something else — that many homeowners weren&apos;t just frustrated with the results of their remodel, but with the process itself.
                 </p>
-                <div className="space-y-2 pl-4 border-l-2 border-[#8B6F47]/30 text-[#4A4A4A]">
+                <div className="space-y-4 pl-4 border-l-2 border-[#8B6F47]/30 text-[#4A4A4A]">
                   <p>Lack of communication.</p>
                   <p>Unclear expectations.</p>
                   <p>Work that didn&apos;t reflect the level of care it should have.</p>
@@ -156,7 +159,7 @@ export default function About() {
                   <p>
                     He approaches every project with a deep respect for the craft.
                   </p>
-                  <p className="text-[#1A1A1A] font-medium">
+                  <p className="text-[#1A1A1A] font-semibold pt-2">
                     Not just getting the job done — but doing it right.
                   </p>
                 </div>
@@ -167,15 +170,12 @@ export default function About() {
                 <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] font-semibold mb-5">
                   Where It Came Together
                 </h3>
-                <div className="space-y-5 text-[#4A4A4A] leading-relaxed">
+                <div className="space-y-6 text-[#4A4A4A] leading-relaxed">
                   <p>
-                    During that same time, Joe remodeled John&apos;s master bathroom.
+                    During that same time, Joe remodeled John&apos;s master bathroom. What started as a project quickly became something more — a shared understanding of how remodeling should be done.
                   </p>
                   <p>
-                    What started as a project quickly became something more — a shared understanding of how remodeling should be done.
-                  </p>
-                  <p>
-                    They stayed in touch over the next couple of years, and it became clear they approached the work the same way: with a focus on communication, quality, and doing things right from start to finish.
+                    They stayed in touch, and over the next couple of years it became clear they approached the work the same way: communication first, quality throughout, and doing things right from start to finish.
                   </p>
                   <p>
                     Eventually, they teamed up to build Fratelli Remodel.
@@ -192,7 +192,7 @@ export default function About() {
                   <p>
                     Today, Fratelli Remodel is built around a simple idea:
                   </p>
-                  <p className="font-[family-name:var(--font-playfair)] text-lg text-[#1A1A1A] italic">
+                  <p className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl text-[#1A1A1A] italic leading-snug py-2">
                     Remodeling should feel as good as the finished result looks.
                   </p>
                   <p>That means:</p>
@@ -209,7 +209,7 @@ export default function About() {
                     ))}
                   </ul>
                   <p>Because in the end, it&apos;s not just about the final product.</p>
-                  <p className="text-[#1A1A1A] font-medium">
+                  <p className="text-[#1A1A1A] font-semibold pt-3">
                     It&apos;s about trusting the process — and the people doing the work.
                   </p>
                 </div>
