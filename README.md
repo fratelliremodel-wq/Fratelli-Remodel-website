@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fratelli Remodel — Website
 
-## Getting Started
+Official website for **Fratelli Remodel**, a Las Vegas-based remodeling company founded by John Juadines and Joe. Built as a high-performance marketing landing page to showcase their work, earn client trust, and drive inbound leads.
 
-First, run the development server:
+**Live Site:** [fratelliremodel.com](https://fratelliremodel.com) *(deployed on Vercel)*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js 16](https://nextjs.org/) (App Router) |
+| Language | TypeScript |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
+| Fonts | Google Fonts — Playfair Display + Inter |
+| Forms | [Formspree](https://formspree.io/) (ID: `xyklppyl`) |
+| Instagram Feed | [Behold.so](https://behold.so/) widget |
+| Deployment | [Vercel](https://vercel.com/) |
+
+---
+
+## Project Structure
+
+```
+fratelli-remodel/
+├── app/
+│   ├── layout.tsx          # Root layout (fonts, metadata)
+│   └── page.tsx            # Main page (assembles all sections)
+├── components/
+│   ├── Nav.tsx             # Sticky navigation bar
+│   ├── Hero.tsx            # Full-screen hero with CTA
+│   ├── TrustBar.tsx        # Quick social proof bar
+│   ├── Services.tsx        # Service offerings grid
+│   ├── Portfolio.tsx       # Photo portfolio grid (4-row × 3-col)
+│   ├── BeforeAfter.tsx     # Before/Progress/After project showcases
+│   ├── Testimonials.tsx    # Real Google reviews with badge
+│   ├── About.tsx           # Founders story with expandable section
+│   ├── Process.tsx         # How the remodel process works
+│   ├── HowWeRemodel.tsx    # Differentiators section
+│   ├── WhyChooseUs.tsx     # Value proposition
+│   ├── WhatGoesWrong.tsx   # Pain points / trust builder
+│   ├── EmotionalHook.tsx   # Emotional CTA section
+│   ├── TrustSection.tsx    # Additional trust signals
+│   ├── FAQ.tsx             # Frequently asked questions
+│   ├── CTABanner.tsx       # Bottom call-to-action banner
+│   ├── InstagramSection.tsx# Live Instagram feed (Behold.so)
+│   ├── Contact.tsx         # Contact form (Formspree)
+│   └── Footer.tsx          # Site footer
+└── public/
+    └── images/             # All project photos
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Sections Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Section | Purpose |
+|---|---|
+| **Hero** | Strong first impression, headline, primary CTA |
+| **Trust Bar** | Quick credibility signals (years, projects, rating) |
+| **Services** | Kitchen, bath, full home, outdoor remodels |
+| **Portfolio** | 9-photo grid showcasing completed work |
+| **Before & After** | Kristen's Full Home Remodel + Lisa's Remodel |
+| **Testimonials** | 3 real Google reviews (Kristen, Lisa, Cindy) + 5.0 badge |
+| **About** | John & Joe's story — expandable "Read the Full Story" |
+| **Process** | Step-by-step remodel journey |
+| **FAQ** | Common homeowner questions answered |
+| **Contact** | Lead form → `fratelliremodel@gmail.com` via Formspree |
+| **Instagram** | Live feed via Behold.so widget |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Install dependencies
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Start development server
+npm run dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The site auto-deploys to Vercel on every push to `main`.
+
+```bash
+git add .
+git commit -m "your message"
+git push origin main
+```
+
+Vercel picks up the push and deploys within ~1 minute.
+
+---
+
+## Key Integrations
+
+### Formspree (Contact Form)
+- Form ID: `xyklppyl`
+- Submissions delivered to: `fratelliremodel@gmail.com`
+- Spam filtering is currently **disabled** to ensure all leads come through
+- Configured in `components/Contact.tsx`
+
+### Behold.so (Instagram Feed)
+- Feed ID: `f6ZOr5YFvVc0DaNn5V8m`
+- Displays live Instagram posts automatically
+- Configured in `components/InstagramSection.tsx`
+
+---
+
+## Photo Notes
+
+All project photos are stored in `public/images/`. HEIC files sourced from iPhone are converted to JPEG using Python Pillow to physically correct EXIF rotation (ensures correct display across all browsers).
+
+**Naming conventions:**
+- `portfolio-*.jpg` — Portfolio grid photos
+- `before-*.jpg` — Before project photos
+- `progress-*.jpg` — In-progress project photos
+- `after-*.jpg` / `portfolio-*` — After/completed photos
+
+---
+
+## Contact
+
+**Fratelli Remodel**
+Las Vegas, NV
+fratelliremodel@gmail.com
