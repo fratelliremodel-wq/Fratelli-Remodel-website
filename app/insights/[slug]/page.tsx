@@ -94,18 +94,34 @@ export default async function ArticlePage({
         </div>
       </article>
 
+      {/* Closing line */}
+      <div className="max-w-2xl mx-auto px-6 pb-16">
+        <div className="border-t border-[#E5DDD4] pt-12">
+          <p className="text-[#3A3A3A] text-lg leading-relaxed mb-6">
+            If you&apos;re thinking about a remodel and want clarity before making
+            any decisions, we&apos;re happy to talk it through.
+          </p>
+          <Link
+            href="/#contact"
+            className="inline-block px-7 py-3.5 bg-[#8B6F47] text-white text-sm font-medium tracking-wide rounded hover:bg-[#7A6040] transition-colors"
+          >
+            Schedule a Conversation
+          </Link>
+        </div>
+      </div>
+
       {/* Bottom CTA */}
-      <section className="border-t border-[#E5DDD4] bg-[#F8F5F0] mt-12">
+      <section className="border-t border-[#E5DDD4] bg-[#F8F5F0]">
         <div className="max-w-2xl mx-auto px-6 py-20">
           <p className="text-[#8B6F47] text-xs tracking-[0.3em] uppercase font-medium mb-4">
             Fratelli Remodel · Las Vegas
           </p>
           <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl text-[#1A1A1A] font-bold mb-5 leading-snug">
-            Have a project in mind?
+            Let&apos;s talk through your project.
           </h2>
           <p className="text-[#6A6A6A] text-lg mb-8 leading-relaxed max-w-md">
-            We&apos;re happy to have an honest conversation about your project — no
-            pressure, no sales pitch.
+            No pressure. Just a clear conversation so you understand your
+            options and what to expect.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link

@@ -20,12 +20,17 @@ export default function InsightsPage() {
         <p className="text-[#8B6F47] text-xs tracking-[0.3em] uppercase font-medium mb-5">
           Fratelli Remodel
         </p>
-        <h1 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-[#1A1A1A] font-bold leading-tight mb-6">
+        <h1 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-[#1A1A1A] font-bold leading-tight mb-4">
           Insights
         </h1>
-        <p className="text-[#6A6A6A] text-lg md:text-xl leading-relaxed max-w-xl">
-          Honest takes on the remodeling process. Written for homeowners who
-          want to know what they&apos;re getting into before they start.
+        <p className="text-[#9A9A9A] text-xs tracking-widest uppercase font-medium mb-6">
+          Las Vegas remodeling contractor&nbsp;&nbsp;·&nbsp;&nbsp;Licensed &amp; insured&nbsp;&nbsp;·&nbsp;&nbsp;5-star rated
+        </p>
+        <p className="text-[#3A3A3A] text-lg md:text-xl leading-relaxed max-w-xl font-medium">
+          What most contractors won&apos;t tell you about remodeling.
+        </p>
+        <p className="text-[#6A6A6A] text-lg md:text-xl leading-relaxed max-w-xl mt-2">
+          Clear, honest insight so you know exactly what you&apos;re walking into.
         </p>
       </section>
 
@@ -73,11 +78,11 @@ export default function InsightsPage() {
             Ready to talk?
           </p>
           <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl text-[#1A1A1A] font-bold mb-5">
-            Let&apos;s talk about your project.
+            Let&apos;s talk through your project.
           </h2>
           <p className="text-[#6A6A6A] text-lg mb-8 max-w-md mx-auto leading-relaxed">
-            No pressure, no sales pitch. Just an honest conversation about what
-            you&apos;re trying to do.
+            No pressure. Just a clear conversation so you understand your
+            options and what to expect.
           </p>
           <Link
             href="/#contact"

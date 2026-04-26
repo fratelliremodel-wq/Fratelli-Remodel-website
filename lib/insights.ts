@@ -18,7 +18,7 @@ export const articles: Article[] = [
     slug: "why-most-remodels-go-wrong",
     title: "Why Most Remodels Go Wrong (And How We Do It Differently)",
     description:
-      "Most homeowners don't have a bad remodel because they made a bad decision. They had a bad remodel because no one told them what to look for.",
+      "Most remodels don't go wrong because of bad work — they go wrong because no one sets clear expectations from the start.",
     date: "April 2026",
     readTime: "5 min read",
     intro:
