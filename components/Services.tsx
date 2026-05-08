@@ -26,8 +26,8 @@ const services = [
     title: "Flooring",
     description:
       "Hardwood, tile, luxury vinyl — installed with proper substrate prep so your floors perform and look great for years.",
-    image: "/images/portfolio-misc-bath-shower.jpg",
-    imageAlt: "Custom tile and flooring — Las Vegas",
+    image: "/images/portfolio-kristen-kitchen2.jpg",
+    imageAlt: "Hardwood flooring installation — Las Vegas",
   },
   {
     title: "Framing & Drywall",
@@ -84,20 +84,25 @@ export default function Services() {
               {/* Overlay — dark by default, lightens on hover */}
               <div className="absolute inset-0 bg-black/50 group-hover:bg-white/70 transition-colors duration-500" />
 
-              {/* Text content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-                <h3 className="font-[family-name:var(--font-playfair)] text-xl font-bold
-                  text-white group-hover:text-[#1A1A1A]
-                  group-hover:-translate-y-5
-                  transition-all duration-500 ease-out">
-                  {service.title}
-                </h3>
-                <p className="text-[#2A2A2A] text-sm leading-relaxed mt-3 max-w-[220px]
-                  opacity-0 translate-y-3
-                  group-hover:opacity-100 group-hover:translate-y-0
-                  transition-all duration-500 delay-100">
-                  {service.description}
-                </p>
+              {/* Content — centered, moves up together on hover */}
+              <div className="absolute inset-0 flex items-center justify-center px-6">
+                <div className="flex flex-col items-center text-center group-hover:-translate-y-4 transition-transform duration-500 ease-out">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-xl font-bold
+                    text-white group-hover:text-[#1A1A1A]
+                    transition-colors duration-500">
+                    {service.title}
+                  </h3>
+                  {/* Description: zero height + invisible by default, expands on hover */}
+                  <div className="overflow-hidden max-h-0 group-hover:max-h-32
+                    mt-0 group-hover:mt-3
+                    transition-all duration-500 ease-out">
+                    <p className="opacity-0 group-hover:opacity-100
+                      transition-opacity duration-300 delay-200
+                      text-[#2A2A2A] text-sm leading-relaxed max-w-[210px]">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
