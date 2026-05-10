@@ -63,12 +63,12 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <Link
-            href="/estimate"
+          <a
+            href="#contact"
             className="ml-2 px-5 py-2.5 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors"
           >
-            Get an Estimate
-          </Link>
+            Start the Conversation
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -105,13 +105,13 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
-            <Link
-              href="/estimate"
+            <a
+              href="#contact"
               onClick={closeMenu}
               className="mt-2 px-5 py-3 bg-[#8B6F47] text-white text-sm tracking-wide rounded text-center hover:bg-[#7A6040] transition-colors"
             >
-              Get an Estimate
-            </Link>
+              Start the Conversation
+            </a>
           </div>
         </div>
       )}
