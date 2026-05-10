@@ -78,10 +78,14 @@ export default function EstimateChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
 
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, []);
 
   useEffect(() => {
@@ -274,7 +278,7 @@ export default function EstimateChat() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -315,10 +319,10 @@ export default function EstimateChat() {
 
               {/* Text */}
               {msg.content === "" && msg.role === "assistant" ? (
-                <div className="flex items-center gap-1 py-1">
-                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-bounce [animation-delay:0ms]" />
-                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-bounce [animation-delay:150ms]" />
-                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-bounce [animation-delay:300ms]" />
+                <div className="flex items-center gap-1 py-1 h-5">
+                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-pulse [animation-delay:0ms]" />
+                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-pulse [animation-delay:300ms]" />
+                  <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-pulse [animation-delay:600ms]" />
                 </div>
               ) : (
                 <p
