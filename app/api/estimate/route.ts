@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { getSupabase } from "@/lib/supabase";
 import { ESTIMATOR_SYSTEM_PROMPT } from "@/lib/estimator-prompt";
+
+export const runtime = "edge";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -100,59 +101,6 @@ export async function POST(req: NextRequest) {
         await writer.write(encoder.encode(`\n\n[Error: ${errMsg}]`));
       } finally {
         await writer.close();
-      }
-
-      // Save to Supabase after stream completes (non-fatal)
-      if (fullText) {
-        try {
-          const supabase = getSupabase();
-          let convId = conversationId;
-
-          if (!convId) {
-            const { data: conv, error: convError } = await supabase
-              .from("conversations")
-              .insert({ status: "active" })
-              .select("id")
-              .single();
-
-            if (!convError && conv) {
-              convId = conv.id;
-            }
-          }
-
-          if (convId) {
-            const lastUserMsg = [...messages].reverse().find((m) => m.role === "user");
-            if (lastUserMsg) {
-              const userContent =
-                typeof lastUserMsg.content === "string"
-                  ? lastUserMsg.content
-                  : lastUserMsg.content
-                      .filter((b) => b.type === "text")
-                      .map((b) => (b as { type: "text"; text: string }).text)
-                      .join(" ");
-
-              const hasImage =
-                typeof lastUserMsg.content !== "string" &&
-                lastUserMsg.content.some((b) => b.type === "image_url");
-
-              await supabase.from("messages").insert({
-                conversation_id: convId,
-                role: "user",
-                content: userContent,
-                has_image: hasImage,
-              });
-            }
-
-            await supabase.from("messages").insert({
-              conversation_id: convId,
-              role: "assistant",
-              content: fullText,
-              has_image: false,
-            });
-          }
-        } catch (dbErr) {
-          console.error("DB save error:", dbErr);
-        }
       }
     })();
 
