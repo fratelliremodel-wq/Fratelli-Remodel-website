@@ -15,7 +15,7 @@ interface Message {
   id: string;
   role: MessageRole;
   content: string | ContentBlock[];
-  imagePreview?: string; // local blob URL for display
+  imagePreviews?: string[]; // local blob URLs for display
 }
 
 const WELCOME_MESSAGE: Message = {
@@ -25,7 +25,6 @@ const WELCOME_MESSAGE: Message = {
     "Hi there! I'm Fratelli AI, here to help you get a rough sense of what your remodel might cost before you ever have to pick up the phone.\n\nI'll ask you a few questions about your project, and if you can share a photo, even better — John always says a picture is worth a thousand dollar signs. 😄\n\nPrefer to talk directly with John right now? Call or text **(702) 324-7949**. If he doesn't answer, he's likely hands-on with clients — texting is usually best and he responds personally.\n\nTo get started: **what are you thinking about remodeling?**",
 };
 
-// Progress steps — loosely tracks conversation depth
 const PROGRESS_STEPS = [
   "Getting started",
   "Project type",
@@ -48,13 +47,11 @@ function estimateProgress(messages: Message[]): number {
 }
 
 function renderMarkdown(text: string): React.ReactNode {
-  // Simple markdown: bold (**text**), line breaks
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
-    // Handle newlines
     return part.split("\n").map((line, j, arr) => (
       <span key={`${i}-${j}`}>
         {line}
@@ -64,14 +61,18 @@ function renderMarkdown(text: string): React.ReactNode {
   });
 }
 
+interface PendingImage {
+  preview: string; // local blob URL
+  url: string | null; // Supabase public URL (null while uploading)
+  uploading: boolean;
+  error: string | null;
+}
+
 export default function EstimateChat() {
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
-  const [pendingImageUrl, setPendingImageUrl] = useState<string | null>(null); // Supabase URL
-  const [pendingImagePreview, setPendingImagePreview] = useState<string | null>(null); // local blob
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [pendingImages, setPendingImages] = useState<PendingImage[]>([]);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -85,7 +86,6 @@ export default function EstimateChat() {
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  // Auto-resize textarea
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
@@ -94,61 +94,82 @@ export default function EstimateChat() {
   }, [input]);
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
 
-    setUploadError(null);
-    setIsUploading(true);
+    // Add placeholders immediately
+    const newImages: PendingImage[] = files.map((file) => ({
+      preview: URL.createObjectURL(file),
+      url: null,
+      uploading: true,
+      error: null,
+    }));
 
-    // Show local preview immediately
-    const blobUrl = URL.createObjectURL(file);
-    setPendingImagePreview(blobUrl);
+    setPendingImages((prev) => [...prev, ...newImages]);
 
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
+    // Upload each file
+    const startIndex = pendingImages.length;
+    await Promise.all(
+      files.map(async (file, i) => {
+        const idx = startIndex + i;
+        try {
+          const formData = new FormData();
+          formData.append("file", file);
+          const res = await fetch("/api/upload", { method: "POST", body: formData });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Upload failed");
+          setPendingImages((prev) =>
+            prev.map((img, j) =>
+              j === idx ? { ...img, url: data.url, uploading: false } : img
+            )
+          );
+        } catch (err) {
+          setPendingImages((prev) =>
+            prev.map((img, j) =>
+              j === idx
+                ? { ...img, uploading: false, error: (err as Error).message }
+                : img
+            )
+          );
+        }
+      })
+    );
 
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Upload failed");
-      }
-
-      setPendingImageUrl(data.url);
-    } catch (err) {
-      setUploadError((err as Error).message);
-      setPendingImagePreview(null);
-      setPendingImageUrl(null);
-      URL.revokeObjectURL(blobUrl);
-    } finally {
-      setIsUploading(false);
-      // Reset file input
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const clearPendingImage = () => {
-    if (pendingImagePreview) URL.revokeObjectURL(pendingImagePreview);
-    setPendingImagePreview(null);
-    setPendingImageUrl(null);
-    setUploadError(null);
+  const removePendingImage = (idx: number) => {
+    setPendingImages((prev) => {
+      URL.revokeObjectURL(prev[idx].preview);
+      return prev.filter((_, i) => i !== idx);
+    });
   };
+
+  const isUploading = pendingImages.some((img) => img.uploading);
+  const readyImageUrls = pendingImages
+    .filter((img) => img.url && !img.error)
+    .map((img) => img.url as string);
+
+  const canSend =
+    (input.trim() || readyImageUrls.length > 0) && !isStreaming && !isUploading;
 
   const sendMessage = async () => {
+    if (!canSend) return;
+
     const text = input.trim();
-    if ((!text && !pendingImageUrl) || isStreaming) return;
+    const imagePreviews = pendingImages
+      .filter((img) => img.url)
+      .map((img) => img.preview);
 
-    // Build content for this message
+    // Build content blocks
     let userContent: string | ContentBlock[];
-    let userPreview: string | undefined;
-
-    if (pendingImageUrl) {
+    if (readyImageUrls.length > 0) {
       const blocks: ContentBlock[] = [];
       if (text) blocks.push({ type: "text", text });
-      blocks.push({ type: "image_url", image_url: { url: pendingImageUrl } });
+      readyImageUrls.forEach((url) =>
+        blocks.push({ type: "image_url", image_url: { url } })
+      );
       userContent = blocks;
-      userPreview = pendingImagePreview || undefined;
     } else {
       userContent = text;
     }
@@ -157,16 +178,15 @@ export default function EstimateChat() {
       id: Date.now().toString(),
       role: "user",
       content: userContent,
-      imagePreview: userPreview,
+      imagePreviews: imagePreviews.length > 0 ? imagePreviews : undefined,
     };
 
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setInput("");
-    clearPendingImage();
+    setPendingImages([]);
     setIsStreaming(true);
 
-    // Add placeholder assistant message
     const assistantId = (Date.now() + 1).toString();
     setMessages((prev) => [
       ...prev,
@@ -174,7 +194,6 @@ export default function EstimateChat() {
     ]);
 
     try {
-      // Build API payload — only send role + content (no imagePreview)
       const apiMessages = updatedMessages.map((m) => ({
         role: m.role,
         content: m.content,
@@ -183,15 +202,10 @@ export default function EstimateChat() {
       const res = await fetch("/api/estimate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: apiMessages,
-          conversationId,
-        }),
+        body: JSON.stringify({ messages: apiMessages, conversationId }),
       });
 
-      if (!res.ok) {
-        throw new Error("Request failed");
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const reader = res.body!.getReader();
       const decoder = new TextDecoder();
@@ -201,21 +215,11 @@ export default function EstimateChat() {
         const { done, value } = await reader.read();
         if (done) break;
         accumulated += decoder.decode(value, { stream: true });
-
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId ? { ...m, content: accumulated } : m
           )
         );
-      }
-
-      // Extract conversation ID from Supabase if we don't have one yet
-      // (The API route creates it on the first message; we'll track it client-side on next call)
-      if (!conversationId) {
-        // Heuristic: if the assistant message includes an estimate, it's likely further in
-        // We don't get the ID back from the streaming endpoint — that's OK for Phase 1
-        // The DB still saves it correctly; we just can't link follow-ups
-        // TODO Phase 2: return conversation ID in a header
       }
     } catch (err) {
       console.error("Send error:", err);
@@ -253,9 +257,7 @@ export default function EstimateChat() {
           <span className="text-[#8B6F47] text-xs tracking-[0.2em] uppercase font-medium">
             Project Assessment
           </span>
-          <span className="text-[#9A9A9A] text-xs">
-            {PROGRESS_STEPS[progressStep]}
-          </span>
+          <span className="text-[#9A9A9A] text-xs">{PROGRESS_STEPS[progressStep]}</span>
         </div>
         <div className="h-1 rounded-full bg-[#E5DDD4] overflow-hidden">
           <div
@@ -272,7 +274,6 @@ export default function EstimateChat() {
             key={msg.id}
             className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-3`}
           >
-            {/* AI avatar */}
             {msg.role === "assistant" && (
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#8B6F47] flex items-center justify-center mt-0.5">
                 <span className="text-white text-xs font-bold font-[family-name:var(--font-playfair)]">
@@ -288,23 +289,26 @@ export default function EstimateChat() {
                   : "bg-white border border-[#E5DDD4] rounded-2xl rounded-tl-sm px-4 py-3"
               }`}
             >
-              {/* Image preview in message */}
-              {msg.imagePreview && (
-                <div className="mb-2 rounded-lg overflow-hidden">
-                  <Image
-                    src={msg.imagePreview}
-                    alt="Uploaded photo"
-                    width={260}
-                    height={180}
-                    className="object-cover w-full"
-                    unoptimized
-                  />
+              {/* Image previews */}
+              {msg.imagePreviews && msg.imagePreviews.length > 0 && (
+                <div className={`mb-2 flex gap-2 flex-wrap ${msg.imagePreviews.length === 1 ? "" : ""}`}>
+                  {msg.imagePreviews.map((src, i) => (
+                    <div key={i} className="rounded-lg overflow-hidden">
+                      <Image
+                        src={src}
+                        alt={`Uploaded photo ${i + 1}`}
+                        width={msg.imagePreviews!.length === 1 ? 260 : 120}
+                        height={msg.imagePreviews!.length === 1 ? 180 : 90}
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
 
-              {/* Text content */}
+              {/* Text */}
               {msg.content === "" && msg.role === "assistant" ? (
-                // Typing indicator
                 <div className="flex items-center gap-1 py-1">
                   <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-bounce [animation-delay:0ms]" />
                   <div className="w-2 h-2 rounded-full bg-[#C4A882] animate-bounce [animation-delay:150ms]" />
@@ -331,58 +335,50 @@ export default function EstimateChat() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Image pending preview */}
-      {(pendingImagePreview || isUploading || uploadError) && (
-        <div className="px-6 pb-2">
-          <div className="inline-flex items-center gap-2 bg-[#F2EDE6] border border-[#E5DDD4] rounded-lg px-3 py-2">
-            {isUploading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-[#8B6F47] border-t-transparent rounded-full animate-spin" />
-                <span className="text-xs text-[#8B6F47]">Uploading photo…</span>
-              </>
-            ) : uploadError ? (
-              <>
-                <span className="text-xs text-red-500">{uploadError}</span>
-                <button
-                  onClick={clearPendingImage}
-                  className="text-[#9A9A9A] hover:text-[#1A1A1A] text-xs ml-1"
-                >
-                  ✕
-                </button>
-              </>
-            ) : (
-              <>
-                {pendingImagePreview && (
+      {/* Pending image thumbnails */}
+      {pendingImages.length > 0 && (
+        <div className="px-6 pb-2 flex gap-2 flex-wrap">
+          {pendingImages.map((img, i) => (
+            <div
+              key={i}
+              className="relative inline-flex items-center gap-1.5 bg-[#F2EDE6] border border-[#E5DDD4] rounded-lg px-2 py-1.5"
+            >
+              {img.uploading ? (
+                <>
+                  <div className="w-3.5 h-3.5 border-2 border-[#8B6F47] border-t-transparent rounded-full animate-spin" />
+                  <span className="text-xs text-[#8B6F47]">Uploading…</span>
+                </>
+              ) : img.error ? (
+                <>
+                  <span className="text-xs text-red-500 max-w-[140px] truncate">{img.error}</span>
+                  <button onClick={() => removePendingImage(i)} className="text-[#9A9A9A] hover:text-[#1A1A1A] text-xs">✕</button>
+                </>
+              ) : (
+                <>
                   <Image
-                    src={pendingImagePreview}
+                    src={img.preview}
                     alt="Photo to send"
-                    width={40}
-                    height={40}
+                    width={32}
+                    height={32}
                     className="object-cover rounded"
                     unoptimized
                   />
-                )}
-                <span className="text-xs text-[#8B6F47]">Photo ready to send</span>
-                <button
-                  onClick={clearPendingImage}
-                  className="text-[#9A9A9A] hover:text-[#1A1A1A] text-xs ml-1"
-                >
-                  ✕
-                </button>
-              </>
-            )}
-          </div>
+                  <span className="text-xs text-[#8B6F47]">Ready</span>
+                  <button onClick={() => removePendingImage(i)} className="text-[#9A9A9A] hover:text-[#1A1A1A] text-xs ml-0.5">✕</button>
+                </>
+              )}
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Input area */}
+      {/* Input */}
       <div className="px-6 pb-6 pt-2">
         <div className="flex items-end gap-2 bg-[#FAFAF8] border border-[#E5DDD4] focus-within:border-[#8B6F47] rounded-xl px-4 py-3 transition-colors">
-          {/* Photo upload button */}
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading || isStreaming}
-            title="Attach a photo"
+            title="Attach photos"
             className="flex-shrink-0 text-[#C4A882] hover:text-[#8B6F47] transition-colors disabled:opacity-40 mb-0.5"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -394,11 +390,11 @@ export default function EstimateChat() {
             ref={fileInputRef}
             type="file"
             accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            multiple
             onChange={handleFileSelect}
             className="hidden"
           />
 
-          {/* Textarea */}
           <textarea
             ref={textareaRef}
             value={input}
@@ -410,10 +406,9 @@ export default function EstimateChat() {
             className="flex-1 resize-none bg-transparent text-[#1A1A1A] text-sm leading-relaxed placeholder:text-[#B0A898] focus:outline-none disabled:opacity-60 max-h-40"
           />
 
-          {/* Send button */}
           <button
             onClick={sendMessage}
-            disabled={(!input.trim() && !pendingImageUrl) || isStreaming || isUploading}
+            disabled={!canSend}
             className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#8B6F47] disabled:bg-[#C4A882] flex items-center justify-center transition-colors hover:bg-[#7A6040] mb-0.5"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
