@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useRef, useEffect, FormEvent, FocusEvent } from "react";
+import posthog from "posthog-js";
 
 const inputClass =
   "w-full px-4 py-3 border border-[#E5DDD4] rounded-lg text-[#1A1A1A] text-sm placeholder:text-[#B0A898] focus:outline-none focus:border-[#8B6F47] focus:ring-1 focus:ring-[#8B6F47] transition-colors bg-[#FAFAF8]";
@@ -13,12 +14,49 @@ const helperClass = "text-[#4A4A4A]/55 text-xs mt-1.5 leading-snug";
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const lastFieldRef = useRef<string | null>(null);
+  const submittedRef = useRef(false);
+  const startedRef = useRef(false);
+
+  const handleFirstFocus = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    posthog.capture("contact_form_started");
+  };
+
+  const handleFieldFocus = (e: FocusEvent<HTMLFormElement>) => {
+    const target = e.target as unknown as { name?: string };
+    if (target?.name) lastFieldRef.current = target.name;
+    handleFirstFocus();
+  };
+
+  useEffect(() => {
+    const onLeave = () => {
+      if (!startedRef.current || submittedRef.current) return;
+      posthog.capture("contact_form_abandoned", {
+        last_field: lastFieldRef.current,
+      });
+    };
+    window.addEventListener("pagehide", onLeave);
+    return () => window.removeEventListener("pagehide", onLeave);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    const email = String(data.get("email") || "");
+    const leadProps = {
+      project_type: String(data.get("project_type") || ""),
+      budget: String(data.get("budget") || ""),
+      funding: String(data.get("funding") || ""),
+      timeline: String(data.get("timeline") || ""),
+      vision_maturity: String(data.get("vision_maturity") || ""),
+      location: String(data.get("location") || ""),
+      has_message: Boolean(String(data.get("message") || "").trim()),
+    };
 
     try {
       const res = await fetch("https://formspree.io/f/xyklppyl", {
@@ -27,10 +65,26 @@ export default function Contact() {
         headers: { Accept: "application/json" },
       });
       if (res.ok) {
+        if (email) {
+          posthog.identify(email, {
+            email,
+            name: String(data.get("name") || ""),
+            phone: String(data.get("phone") || ""),
+          });
+          posthog.setPersonProperties({ is_lead: true, ...leadProps });
+        }
+        posthog.capture("contact_form_submitted", leadProps);
+        submittedRef.current = true;
         setSubmitted(true);
         form.reset();
+      } else {
+        posthog.capture("contact_form_failed", { ...leadProps, status: res.status });
       }
-    } catch {
+    } catch (err) {
+      posthog.capture("contact_form_failed", {
+        ...leadProps,
+        error: err instanceof Error ? err.message : "unknown",
+      });
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -115,6 +169,7 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
+                onFocusCapture={handleFieldFocus}
                 className="bg-white rounded-xl p-8 border border-[#E5DDD4] space-y-6"
               >
 

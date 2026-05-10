@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -62,12 +63,12 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/estimate"
             className="ml-2 px-5 py-2.5 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors"
           >
-            Get a Free Estimate
-          </a>
+            Get an Estimate
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -104,13 +105,13 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#contact"
+            <Link
+              href="/estimate"
               onClick={closeMenu}
               className="mt-2 px-5 py-3 bg-[#8B6F47] text-white text-sm tracking-wide rounded text-center hover:bg-[#7A6040] transition-colors"
             >
-              Get a Free Estimate
-            </a>
+              Get an Estimate
+            </Link>
           </div>
         </div>
       )}
