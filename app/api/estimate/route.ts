@@ -41,13 +41,27 @@ export async function POST(req: NextRequest) {
         if (block.type === "text") {
           return { type: "text", text: block.text };
         }
+        const imgUrl = (block as { type: "image_url"; image_url: { url: string } })
+          .image_url.url;
+
+        // Handle base64 data URLs (data:image/jpeg;base64,...)
+        if (imgUrl.startsWith("data:")) {
+          const [header, data] = imgUrl.split(",");
+          const mediaType = header.split(":")[1].split(";")[0] as
+            | "image/jpeg"
+            | "image/png"
+            | "image/webp"
+            | "image/gif";
+          return {
+            type: "image",
+            source: { type: "base64", media_type: mediaType, data },
+          } as Anthropic.ImageBlockParam;
+        }
+
+        // Handle regular URLs
         return {
           type: "image",
-          source: {
-            type: "url",
-            url: (block as { type: "image_url"; image_url: { url: string } })
-              .image_url.url,
-          },
+          source: { type: "url", url: imgUrl },
         } as Anthropic.ImageBlockParam;
       });
 
