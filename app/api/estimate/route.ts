@@ -37,12 +37,10 @@ export async function POST(req: NextRequest) {
         return { role: msg.role, content: msg.content };
       }
 
-      // Content is an array — convert image_url to image blocks
       const content: Anthropic.ContentBlockParam[] = msg.content.map((block) => {
         if (block.type === "text") {
           return { type: "text", text: block.text };
         }
-        // image_url block — use URL source
         return {
           type: "image",
           source: {
@@ -56,43 +54,46 @@ export async function POST(req: NextRequest) {
       return { role: msg.role, content };
     });
 
-    // Create a ReadableStream that pipes the Claude stream to the client
-    const stream = new ReadableStream({
-      async start(controller) {
-        let fullText = "";
+    // Use TransformStream for reliable streaming in Vercel
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
+    const encoder = new TextEncoder();
 
-        try {
-          const claudeStream = anthropic.messages.stream({
-            model: "claude-sonnet-4-5",
-            max_tokens: 1024,
-            system: ESTIMATOR_SYSTEM_PROMPT,
-            messages: anthropicMessages,
-          });
+    // Run streaming in background — don't await
+    (async () => {
+      let fullText = "";
+      try {
+        const stream = anthropic.messages.stream({
+          model: "claude-3-5-sonnet-20241022",
+          max_tokens: 1024,
+          system: ESTIMATOR_SYSTEM_PROMPT,
+          messages: anthropicMessages,
+        });
 
-          for await (const event of claudeStream) {
-            if (
-              event.type === "content_block_delta" &&
-              event.delta.type === "text_delta"
-            ) {
-              const chunk = event.delta.text;
-              fullText += chunk;
-              controller.enqueue(new TextEncoder().encode(chunk));
-            }
+        for await (const event of stream) {
+          if (
+            event.type === "content_block_delta" &&
+            event.delta.type === "text_delta"
+          ) {
+            const chunk = event.delta.text;
+            fullText += chunk;
+            await writer.write(encoder.encode(chunk));
           }
-
-          controller.close();
-        } catch (err) {
-          console.error("Claude stream error:", err);
-          controller.error(err);
-          return;
         }
+      } catch (err) {
+        console.error("Claude stream error:", err);
+        const errMsg = err instanceof Error ? err.message : String(err);
+        await writer.write(encoder.encode(`\n\n[Error: ${errMsg}]`));
+      } finally {
+        await writer.close();
+      }
 
-        // Save assistant message to Supabase
+      // Save to Supabase after stream completes (non-fatal)
+      if (fullText) {
         try {
           const supabase = getSupabase();
           let convId = conversationId;
 
-          // If no conversation yet, create one
           if (!convId) {
             const { data: conv, error: convError } = await supabase
               .from("conversations")
@@ -100,15 +101,12 @@ export async function POST(req: NextRequest) {
               .select("id")
               .single();
 
-            if (convError) {
-              console.error("Failed to create conversation:", convError);
-            } else {
+            if (!convError && conv) {
               convId = conv.id;
             }
           }
 
           if (convId) {
-            // Save the latest user message
             const lastUserMsg = [...messages].reverse().find((m) => m.role === "user");
             if (lastUserMsg) {
               const userContent =
@@ -131,7 +129,6 @@ export async function POST(req: NextRequest) {
               });
             }
 
-            // Save assistant response
             await supabase.from("messages").insert({
               conversation_id: convId,
               role: "assistant",
@@ -140,17 +137,16 @@ export async function POST(req: NextRequest) {
             });
           }
         } catch (dbErr) {
-          // Non-fatal — log but don't break the response
           console.error("DB save error:", dbErr);
         }
-      },
-    });
+      }
+    })();
 
-    return new NextResponse(stream, {
+    return new NextResponse(readable, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
-        "Transfer-Encoding": "chunked",
         "X-Accel-Buffering": "no",
+        "Cache-Control": "no-cache",
       },
     });
   } catch (err) {
