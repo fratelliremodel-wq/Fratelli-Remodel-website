@@ -221,16 +221,36 @@ export default function EstimateChat() {
       const decoder = new TextDecoder();
       let accumulated = "";
 
+      // Use requestAnimationFrame-paced updates for smooth rendering
+      let pendingChunk = "";
+      let rafId: ReturnType<typeof requestAnimationFrame> | null = null;
+
+      const flush = () => {
+        if (pendingChunk) {
+          accumulated += pendingChunk;
+          pendingChunk = "";
+          const snap = accumulated;
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId ? { ...m, content: snap } : m
+            )
+          );
+        }
+        rafId = null;
+      };
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        accumulated += decoder.decode(value, { stream: true });
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId ? { ...m, content: accumulated } : m
-          )
-        );
+        pendingChunk += decoder.decode(value, { stream: true });
+        if (!rafId) {
+          rafId = requestAnimationFrame(flush);
+        }
       }
+
+      // Final flush
+      if (rafId) cancelAnimationFrame(rafId);
+      flush();
     } catch (err) {
       console.error("Send error:", err);
       setMessages((prev) =>

@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { ESTIMATOR_SYSTEM_PROMPT } from "@/lib/estimator-prompt";
 
-export const runtime = "edge";
-
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
