@@ -68,6 +68,41 @@ interface PendingImage {
   error: string | null;
 }
 
+// Compress image to JPEG, max 1400px on longest side, 82% quality
+async function compressImage(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const MAX = 1400;
+      let { width, height } = img;
+      if (width > MAX || height > MAX) {
+        if (width > height) {
+          height = Math.round((height * MAX) / width);
+          width = MAX;
+        } else {
+          width = Math.round((width * MAX) / height);
+          height = MAX;
+        }
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d")!;
+      ctx.drawImage(img, 0, 0, width, height);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(
+        (blob) => {
+          resolve(new File([blob!], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" }));
+        },
+        "image/jpeg",
+        0.82
+      );
+    };
+    img.src = url;
+  });
+}
+
 export default function EstimateChat() {
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
@@ -117,14 +152,15 @@ export default function EstimateChat() {
 
     setPendingImages((prev) => [...prev, ...newImages]);
 
-    // Upload each file
+    // Upload each file (compress first)
     const startIndex = pendingImages.length;
     await Promise.all(
       files.map(async (file, i) => {
         const idx = startIndex + i;
         try {
+          const compressed = await compressImage(file);
           const formData = new FormData();
-          formData.append("file", file);
+          formData.append("file", compressed);
           const res = await fetch("/api/upload", { method: "POST", body: formData });
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "Upload failed");
