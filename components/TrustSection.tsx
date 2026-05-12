@@ -52,14 +52,8 @@ export default function TrustSection() {
             <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-white font-bold leading-tight mb-6">
               Built on Trust
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed mb-4">
-              Remodeling is a big decision. You&apos;re inviting people into your
-              home, trusting them with your space, and committing real money to
-              the outcome. You should feel confident in who you hire.
-            </p>
-            <p className="text-white/60 leading-relaxed">
-              We&apos;re licensed, insured, and committed to doing things the
-              right way — from the first conversation to the final walkthrough.
+            <p className="text-white/60 text-lg leading-relaxed">
+              You&apos;re inviting people into your home and trusting them with real money. We&apos;re licensed, insured, and committed to doing things the right way — from the first conversation to the final walkthrough.
             </p>
           </div>
 

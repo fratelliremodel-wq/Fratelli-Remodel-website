@@ -38,9 +38,7 @@ export default function Process() {
             What It&apos;s Like to Work With Us
           </h2>
           <p className="text-[#4A4A4A] text-lg leading-relaxed">
-            A remodel done right starts well before the first nail. Here&apos;s
-            how we take you from first conversation to finished project — with
-            clarity at every step.
+            From first conversation to final walkthrough — with clarity at every step.
           </p>
         </div>
 
@@ -84,10 +82,7 @@ export default function Process() {
               <span className="text-[#1A1A1A] font-semibold">
                 A note on consultations:
               </span>{" "}
-              We ask that all decision-makers be present for walkthroughs and
-              planning conversations. It keeps everyone aligned, avoids
-              confusion, and makes the whole process smoother for everyone
-              involved.
+              We ask that all decision-makers join walkthroughs and planning conversations — it keeps everyone aligned and makes execution smoother for all involved.
             </p>
           </div>
         </div>

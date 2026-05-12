@@ -59,13 +59,9 @@ export default function About() {
               <p>
                 For most homeowners, remodeling isn&apos;t just about how the finished space will look — it&apos;s about how the entire process will feel.
               </p>
-              <div className="space-y-4 pl-4 border-l-2 border-[#8B6F47]/40">
-                <p className="font-medium text-[#2A2A2A]">Will it be organized?</p>
-                <p className="font-medium text-[#2A2A2A]">Will communication be clear?</p>
-                <p className="font-medium text-[#2A2A2A]">Will the work actually be done right?</p>
-              </div>
-              <p>At Fratelli Remodel, that&apos;s exactly what we focus on.</p>
-              <p className="text-[#4A4A4A]/70 italic">Because the process matters just as much as the result.</p>
+              <p className="text-[#4A4A4A]/70 italic">
+                Because the process matters just as much as the result.
+              </p>
             </div>
 
             {/* Story teaser */}
@@ -74,7 +70,7 @@ export default function About() {
                 Our Story
               </p>
               <p className="text-[#4A4A4A] leading-relaxed">
-                Fratelli Remodel was built from experience — but more importantly, from a belief that homeowners deserve a better remodeling experience.
+                Fratelli Remodel was built from experience — but more importantly, from a belief that homeowners deserve better.
               </p>
             </div>
 
@@ -115,92 +111,107 @@ export default function About() {
               </div>
 
               {/* John's story */}
-              <div className="space-y-6 text-[#4A4A4A] leading-relaxed mb-14">
+              <div className="space-y-6 text-[#4A4A4A] leading-relaxed mb-10">
                 <p>
-                  John Juadines was introduced to construction early, working alongside his grandfather and uncle in his early twenties. That foundation instilled a respect for craftsmanship and doing things the right way from the start.
-                </p>
-                <p>
-                  His path then took a different direction. After earning a degree in biology and working as an orthodontic assistant, John developed a high level of attention to detail — the kind that requires precision, patience, and care in every small decision.
+                  John was introduced to construction early, working alongside his grandfather and uncle in his early twenties. That foundation gave him a deep respect for doing things right from the start.
                 </p>
                 <p>
-                  Later, as a CrossFit gym owner, he spent years working closely with people — listening, guiding, and helping them through challenges.
+                  His path then took different directions — a biology degree, work as an orthodontic assistant, then years running a CrossFit gym. Each shaped him: the precision of clinical work, the focus on people and communication from coaching.
                 </p>
                 <p>
-                  That experience shaped how he communicates today: with clarity, empathy, and a genuine focus on what matters most to the client.
+                  When the pandemic hit, he returned to hands-on construction. What started as a way to support his family quickly reignited a deeper passion — and revealed something important about the industry.
                 </p>
-                <p>
-                  When the pandemic hit, John returned to hands-on construction through his business, Farmhouse Handyman. What started as a way to support his family quickly reignited a deeper passion for building.
+                <p className="font-medium text-[#2A2A2A]">
+                  Homeowners weren&apos;t just frustrated with results. They were frustrated with the process itself.
                 </p>
-                <p className="font-medium text-[#2A2A2A] pt-1">
-                  But more importantly, it revealed something else — that many homeowners weren&apos;t just frustrated with the results of their remodel, but with the process itself.
-                </p>
-                <div className="space-y-4 pl-4 border-l-2 border-[#8B6F47]/30 text-[#4A4A4A]">
+                <div className="space-y-3 pl-4 border-l-2 border-[#8B6F47]/30 text-[#4A4A4A]">
                   <p>Lack of communication.</p>
                   <p>Unclear expectations.</p>
-                  <p>Work that didn&apos;t reflect the level of care it should have.</p>
+                  <p>Work that didn&apos;t reflect the care it should have.</p>
                 </div>
-                <p>
-                  That&apos;s where the vision for Fratelli Remodel began to take shape.
-                </p>
+                <p>That&apos;s where the vision for Fratelli Remodel began to take shape.</p>
+              </div>
+
+              {/* Photo break — John and Joe at work */}
+              <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-10">
+                <Image
+                  src="/images/team-john-joe-hats.jpg"
+                  alt="John and Joe on the job — Fratelli Remodel"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                />
+                <div className="absolute bottom-0 left-0 right-0 px-5 py-3 bg-black/50">
+                  <p className="text-white/70 text-xs">John and Joe — on the job, Las Vegas, NV</p>
+                </div>
               </div>
 
               {/* Joe's story */}
-              <div className="mb-14">
+              <div className="mb-10">
                 <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] font-semibold mb-5">
                   Experience That Shows in the Work
                 </h3>
-                <div className="space-y-5 text-[#4A4A4A] leading-relaxed">
+                <div className="space-y-4 text-[#4A4A4A] leading-relaxed">
                   <p>
-                    Joe brings a lifetime of experience rooted in construction and remodeling.
+                    Joe brings a lifetime of experience rooted in construction. Raised in the Midwest, he learned the trade directly from his father — knowledge passed through generations.
                   </p>
                   <p>
-                    Raised in the Midwest, he learned the trade directly from his father, with knowledge passed down through generations. His experience spans a wide range of homes — including older properties where attention to detail and problem-solving matter most.
+                    His experience spans a wide range of homes, including older properties where problem-solving and attention to hidden details matter most.
                   </p>
-                  <p>
-                    He approaches every project with a deep respect for the craft.
-                  </p>
-                  <p className="text-[#1A1A1A] font-semibold pt-2">
+                  <p className="text-[#1A1A1A] font-semibold">
                     Not just getting the job done — but doing it right.
                   </p>
                 </div>
               </div>
 
               {/* How they met */}
-              <div className="mb-14">
+              <div className="mb-10">
                 <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] font-semibold mb-5">
                   Where It Came Together
                 </h3>
-                <div className="space-y-6 text-[#4A4A4A] leading-relaxed">
+                <div className="space-y-4 text-[#4A4A4A] leading-relaxed">
                   <p>
-                    During that same time, Joe remodeled John&apos;s master bathroom. What started as a project quickly became something more — a shared understanding of how remodeling should be done.
+                    Joe remodeled John&apos;s master bathroom. What started as a project became a shared understanding — they approached the work the same way: communication first, quality throughout, and doing things right from start to finish.
                   </p>
                   <p>
-                    They stayed in touch, and over the next couple of years it became clear they approached the work the same way: communication first, quality throughout, and doing things right from start to finish.
-                  </p>
-                  <p>
-                    Eventually, they teamed up to build Fratelli Remodel.
+                    Over the next couple of years, it became clear they needed to build something together. Fratelli Remodel was the result.
                   </p>
                 </div>
               </div>
 
+              {/* Photo break — progress work */}
+              <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-10">
+                <Image
+                  src="/images/progress-tadgh-framing.jpg"
+                  alt="Framing and rough-in work — the craftsmanship behind the walls"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                />
+                <div className="absolute bottom-0 left-0 right-0 px-5 py-3 bg-black/50">
+                  <p className="text-white/70 text-xs">Framing and rough-in — the work behind the walls that matters most.</p>
+                </div>
+              </div>
+
+              {/* Pull quote — How we work */}
+              <div className="py-10 mb-10 border-t border-b border-[#E5DDD4]">
+                <p className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#1A1A1A] italic leading-snug text-center">
+                  &ldquo;Remodeling should feel as good as the finished result looks.&rdquo;
+                </p>
+              </div>
+
               {/* How we work */}
-              <div className="mb-14">
+              <div className="mb-10">
                 <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] font-semibold mb-5">
                   How We Work
                 </h3>
-                <div className="space-y-5 text-[#4A4A4A] leading-relaxed">
-                  <p>
-                    Today, Fratelli Remodel is built around a simple idea:
-                  </p>
-                  <p className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl text-[#1A1A1A] italic leading-snug py-2">
-                    Remodeling should feel as good as the finished result looks.
-                  </p>
+                <div className="space-y-4 text-[#4A4A4A] leading-relaxed">
                   <p>That means:</p>
                   <ul className="space-y-3 pl-4">
                     {[
                       "clear, consistent communication",
                       "thoughtful planning before work begins",
-                      "attention to detail both behind the walls and in the finishes",
+                      "attention to detail behind the walls and in the finishes",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#8B6F47] flex-shrink-0 mt-2" />
@@ -208,11 +219,14 @@ export default function About() {
                       </li>
                     ))}
                   </ul>
-                  <p>Because in the end, it&apos;s not just about the final product.</p>
-                  <p className="text-[#1A1A1A] font-semibold pt-3">
-                    It&apos;s about trusting the process — and the people doing the work.
-                  </p>
                 </div>
+              </div>
+
+              {/* Closing pull quote */}
+              <div className="py-8 mb-10 text-center">
+                <p className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl text-[#8B6F47] italic leading-snug">
+                  &ldquo;It&apos;s about trusting the process — and the people doing the work.&rdquo;
+                </p>
               </div>
 
               {/* Close button */}

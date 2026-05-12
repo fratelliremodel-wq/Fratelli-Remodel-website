@@ -129,13 +129,8 @@ export default function BeforeAfter() {
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-[#1A1A1A] font-bold leading-tight mb-5">
             Real Projects, Real Work
           </h2>
-          <p className="text-[#4A4A4A] text-lg leading-relaxed mb-4">
-            We don&apos;t just show finished spaces — we show the process behind
-            them.
-          </p>
-          <p className="text-[#4A4A4A] leading-relaxed">
-            Browse the starting conditions, the work behind the walls, and the
-            finished result for each project.
+          <p className="text-[#4A4A4A] text-lg leading-relaxed">
+            We don&apos;t just show finished spaces — we show the full process behind them. Starting conditions, the work behind the walls, and the finished result.
           </p>
         </div>
 

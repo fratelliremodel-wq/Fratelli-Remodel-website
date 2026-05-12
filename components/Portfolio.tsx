@@ -3,51 +3,67 @@ import Image from "next/image";
 const projects = [
   {
     label: "Master Bath Remodel",
-    sub: "Freestanding tub · Gold fixtures",
+    sub: "Freestanding soaking tub · Gold floor-mount filler",
     src: "/images/portfolio-lisa-bath-pro.jpg",
     tall: true,
   },
   {
     label: "Kitchen Remodel",
-    sub: "Dual islands · Quartz countertops",
+    sub: "Dual islands · Quartz countertops · Globe pendants",
     src: "/images/portfolio-lisa-kitchen-wide.jpg",
   },
   {
     label: "Kitchen Remodel",
-    sub: "Fluted island · Dark hardwood",
+    sub: "Fluted island · Quartzite top · Dark hardwood",
     src: "/images/portfolio-kristen-kitchen.jpg",
   },
   {
     label: "Bathroom Remodel",
-    sub: "Patterned floor tile · Globe lights",
+    sub: "Patterned floor tile · Globe lights · Navy vanity",
     src: "/images/portfolio-kristen-bath.jpg",
   },
   {
     label: "Master Bath Remodel",
-    sub: "All-marble · Frameless glass",
+    sub: "All-marble · Frameless glass · Custom niche",
     src: "/images/portfolio-john-bath3.jpg",
+    tall: true,
+  },
+  {
+    label: "Bathroom Remodel",
+    sub: "Walk-in shower · Brushed gold hardware",
+    src: "/images/portfolio-jason-bath.jpg",
   },
   {
     label: "Kitchen Remodel",
-    sub: "Two-tone cabinets · 3D tile backsplash",
+    sub: "Two-tone cabinets · Handmade tile backsplash",
     src: "/images/portfolio-joe-kitchen.jpg",
     tall: true,
   },
   {
+    label: "Bathroom Remodel",
+    sub: "Frameless shower · Brushed gold hardware · Linear drain",
+    src: "/images/portfolio-misc-bath-shower.jpg",
+  },
+  {
     label: "Kitchen Remodel",
-    sub: "Sage island · White quartz · Matte black",
+    sub: "Sage island · White quartz · Matte black hardware",
     src: "/images/portfolio-bob-kitchen2.jpg",
   },
   {
-    label: "Bathroom Remodel",
-    sub: "Frameless shower · Brushed gold hardware",
-    src: "/images/portfolio-misc-bath-shower.jpg",
+    label: "Kitchen Remodel",
+    sub: "White shaker · Farmhouse sink · Butcher block",
+    src: "/images/portfolio-mom-kitchen.jpg",
     tall: true,
   },
   {
-    label: "Kitchen Remodel",
-    sub: "White shaker cabinets · Butcher block · Farmhouse sink",
-    src: "/images/portfolio-mom-kitchen.jpg",
+    label: "Bathroom Remodel",
+    sub: "Boutique tile · Frameless glass · Custom vanity",
+    src: "/images/portfolio-misc-bath-boutique.jpg",
+  },
+  {
+    label: "Hardware Detail",
+    sub: "Brushed nickel · Soft-close cabinetry",
+    src: "/images/portfolio-misc-bath-handle-detail.jpg",
   },
 ];
 
@@ -66,8 +82,7 @@ export default function Portfolio() {
             </h2>
           </div>
           <p className="text-[#4A4A4A] text-sm leading-relaxed max-w-xs sm:text-right">
-            A selection of completed projects — kitchens, bathrooms, and full
-            home remodels across Las Vegas.
+            Kitchens, bathrooms, and full home remodels across Las Vegas.
           </p>
         </div>
 
@@ -88,7 +103,7 @@ export default function Portfolio() {
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
               {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 to-transparent">
                 <p className="text-white text-sm font-semibold">{project.label}</p>
                 <p className="text-white/60 text-xs">{project.sub}</p>
               </div>
@@ -98,9 +113,6 @@ export default function Portfolio() {
 
         {/* Instagram CTA */}
         <div className="mt-10 text-center">
-          <p className="text-[#4A4A4A] text-sm mb-4">
-            Follow our work in progress on Instagram
-          </p>
           <a
             href="https://www.instagram.com/fratelliremodellv"
             target="_blank"
@@ -110,7 +122,7 @@ export default function Portfolio() {
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
             </svg>
-            @fratelliremodellv
+            Follow our work on Instagram · @fratelliremodellv
           </a>
         </div>
       </div>

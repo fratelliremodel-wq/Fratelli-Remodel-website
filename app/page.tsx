@@ -5,6 +5,7 @@ import EmotionalHook from "@/components/EmotionalHook";
 import HowWeRemodel from "@/components/HowWeRemodel";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import CraftsmanshipStrip from "@/components/CraftsmanshipStrip";
 import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
 import BeforeAfter from "@/components/BeforeAfter";
@@ -27,6 +28,7 @@ export default function Home() {
       <HowWeRemodel />
       <Services />
       <WhyChooseUs />
+      <CraftsmanshipStrip />
       <Process />
       <Portfolio />
       <BeforeAfter />
