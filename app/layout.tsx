@@ -32,14 +32,7 @@ export const metadata: Metadata = {
       "Licensed and insured Las Vegas remodeling contractor. Clear communication, quality craftsmanship, and a better remodeling experience from start to finish.",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/images/portfolio-lisa-kitchen-wide.jpg",
-        width: 1536,
-        height: 1024,
-        alt: "Fratelli Remodel — Las Vegas Kitchen Remodel",
-      },
-    ],
+    // opengraph-image.tsx handles the OG image automatically
   },
 };
 
