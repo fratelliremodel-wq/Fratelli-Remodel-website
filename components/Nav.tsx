@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -14,6 +15,11 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // On sub-pages (not home), always use the solid/dark nav appearance
+  const isSubPage = pathname !== "/";
+  const darkNav = scrolled || isSubPage;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -26,45 +32,57 @@ export default function Nav() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        darkNav
           ? "bg-white/98 backdrop-blur-sm shadow-sm border-b border-[#E5DDD4]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex flex-col leading-none group">
+        {/* Logo — always links to home */}
+        <Link href="/" className="flex flex-col leading-none group">
           <span
             className={`font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-widest transition-colors ${
-              scrolled ? "text-[#1A1A1A]" : "text-white"
+              darkNav ? "text-[#1A1A1A]" : "text-white"
             }`}
           >
             FRATELLI
           </span>
           <span
             className={`text-[11px] tracking-[0.35em] uppercase font-medium transition-colors ${
-              scrolled ? "text-[#8B6F47]" : "text-[#C4A882]"
+              darkNav ? "text-[#8B6F47]" : "text-[#C4A882]"
             }`}
           >
             Remodel
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`text-sm tracking-wide transition-colors hover:text-[#8B6F47] ${
-                scrolled ? "text-[#4A4A4A]" : "text-white/80 hover:text-white"
-              }`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`text-sm tracking-wide transition-colors hover:text-[#8B6F47] ${
+                  darkNav ? "text-[#4A4A4A]" : "text-white/80 hover:text-white"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={isSubPage ? `/${l.href}` : l.href}
+                className={`text-sm tracking-wide transition-colors hover:text-[#8B6F47] ${
+                  darkNav ? "text-[#4A4A4A]" : "text-white/80 hover:text-white"
+                }`}
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <a
-            href="#contact"
+            href={isSubPage ? "/#contact" : "#contact"}
             className="ml-2 px-5 py-2.5 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors"
           >
             Start the Conversation
@@ -74,7 +92,7 @@ export default function Nav() {
         {/* Mobile hamburger */}
         <button
           className={`md:hidden p-1 transition-colors ${
-            scrolled ? "text-[#1A1A1A]" : "text-white"
+            darkNav ? "text-[#1A1A1A]" : "text-white"
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
@@ -95,18 +113,29 @@ export default function Nav() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-[#E5DDD4] px-6 py-6 shadow-lg">
           <div className="flex flex-col gap-5">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={closeMenu}
-                className="text-[#4A4A4A] text-sm tracking-wide hover:text-[#8B6F47] transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) =>
+              l.href.startsWith("/") ? (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={closeMenu}
+                  className="text-[#4A4A4A] text-sm tracking-wide hover:text-[#8B6F47] transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a
+                  key={l.href}
+                  href={isSubPage ? `/${l.href}` : l.href}
+                  onClick={closeMenu}
+                  className="text-[#4A4A4A] text-sm tracking-wide hover:text-[#8B6F47] transition-colors"
+                >
+                  {l.label}
+                </a>
+              )
+            )}
             <a
-              href="#contact"
+              href={isSubPage ? "/#contact" : "#contact"}
               onClick={closeMenu}
               className="mt-2 px-5 py-3 bg-[#8B6F47] text-white text-sm tracking-wide rounded text-center hover:bg-[#7A6040] transition-colors"
             >
