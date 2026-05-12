@@ -32,7 +32,14 @@ export const metadata: Metadata = {
       "Licensed and insured Las Vegas remodeling contractor. Clear communication, quality craftsmanship, and a better remodeling experience from start to finish.",
     type: "website",
     locale: "en_US",
-    // opengraph-image.tsx handles the OG image automatically
+    images: [
+      {
+        url: "https://fratelliremodel.com/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Fratelli Remodel — Remodeling Done Right in Las Vegas",
+      },
+    ],
   },
 };
 
