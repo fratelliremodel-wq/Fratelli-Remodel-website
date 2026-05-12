@@ -9,7 +9,7 @@ const testimonials = [
   },
   {
     quote:
-      "John and Joe did an amazing job on a full home remodel for us. Our home was a fixer upper and had some mold and 30+ year old construction. They were thorough, adhered to our budget, and were very communicative throughout the entire process. They even came back THREE DAYS later to address a small touch up list — their work is top notch.",
+      "John and Joe did an amazing job on our full home remodel. Our home was a fixer upper with mold and 30+ year old construction. They were thorough, adhered to our budget, and were communicative throughout. They even came back three days later to address a small touch-up list — their work is top notch.",
     name: "Lisa Davis",
     project: "Full Home Remodel",
     location: "Las Vegas, NV",
@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     quote:
-      "If you found this review, you need look no further….. just stop and call these gentlemen! John and Joe are the real deal! I hired John for two bathroom remodels. When I called, John answered! He was on time and gave me a detailed estimate with allowances. John and Joe did all the work themselves, which was important to me. Their attention to detail was impeccable. I could not be more pleased with the results. I would absolutely hire them again.",
+      "John and Joe are the real deal. I hired them for two bathroom remodels. When I called, John answered. He was on time and gave me a detailed estimate. They did all the work themselves, which was important to me. Their attention to detail was impeccable. I could not be more pleased with the results — I would absolutely hire them again.",
     name: "Cindy Rippley",
     project: "Two Bathroom Remodels",
     location: "Las Vegas, NV",

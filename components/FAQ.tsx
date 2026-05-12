@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Do you work on older homes?",
-    a: "Yes — and we're good at it. Older homes often come with surprises once walls are opened: asbestos concerns, galvanized plumbing, outdated electrical, unexpected framing. We've seen it all and handle it calmly, with clear communication throughout.",
+    a: "Yes — and we're good at it. Older homes often have surprises once walls open: galvanized plumbing, outdated electrical, unexpected framing. We handle it calmly, with clear communication throughout.",
   },
   {
     q: "How do I know if we're a good fit?",
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "What does your process look like?",
-    a: "We start with a conversation to understand your project and goals, then do a walkthrough to assess the space. From there, we provide a clear written proposal, align on selections and schedule, and execute with consistent communication through completion.",
+    a: "A conversation, then a walkthrough, then a clear written proposal. From there, we align on selections and schedule and execute with consistent communication through completion.",
   },
   {
     q: "Do both homeowners need to be present for meetings?",
@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How do you handle surprises or hidden conditions behind the walls?",
-    a: "We treat the unexpected as a normal part of experienced remodeling. When something comes up, we stop, explain what we found, walk you through the options, and help you make an informed decision. No drama, no disappearing — just clear communication and practical solutions.",
+    a: "We stop, explain what we found, walk you through the options, and help you decide. No drama — just clear communication and practical solutions.",
   },
   {
     q: "How do I get started?",

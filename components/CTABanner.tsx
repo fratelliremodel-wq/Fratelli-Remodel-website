@@ -1,7 +1,7 @@
 export default function CTABanner() {
   return (
     <section
-      className="py-24 md:py-28 relative overflow-hidden"
+      className="py-32 md:py-40 relative overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, #8B6F47 0%, #7A6040 50%, #6B5235 100%)",
@@ -15,17 +15,10 @@ export default function CTABanner() {
         }}
       />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-        <p className="text-white/50 text-xs tracking-[0.3em] uppercase font-medium mb-5">
-          Ready to Begin
-        </p>
-        <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-white font-bold leading-tight mb-6">
+      <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
+        <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-white font-bold leading-tight mb-10">
           Start Your Project With Confidence
         </h2>
-        <p className="text-white/70 text-lg max-w-xl mx-auto leading-relaxed mb-10">
-          If you&apos;re planning a remodel and want a clear, professional
-          experience from start to finish, we&apos;d love to connect.
-        </p>
         <a
           href="#contact"
           className="inline-block px-10 py-4 bg-white text-[#8B6F47] text-sm font-semibold tracking-wide rounded hover:bg-[#F2EDE6] transition-colors"

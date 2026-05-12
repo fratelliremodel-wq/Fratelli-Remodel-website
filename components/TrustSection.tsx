@@ -40,7 +40,7 @@ const trustPoints = [
 
 export default function TrustSection() {
   return (
-    <section className="py-24 md:py-32 bg-[#1A1A1A]">
+    <section className="py-28 md:py-40 bg-[#1A1A1A]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
