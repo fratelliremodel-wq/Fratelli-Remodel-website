@@ -22,7 +22,7 @@ const WELCOME_MESSAGE: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hey — I'm Fratelli AI. I work with John at Fratelli Remodel, and I'm here to help you think through your project before you ever have to pick up the phone.\n\nWe'll keep it conversational — no forms, no pressure.\n\nIf you'd rather talk to John directly, you can text him at **(702) 324-7949**. He responds personally.\n\nSo — what are you thinking about remodeling?",
+    "Hey — I'm Fratelli AI. I work with John at Fratelli Remodel, and I'm here to help you think through your project before you ever have to pick up the phone.\n\nOne thing that makes a real difference: **photos of your space**. The more I can actually see what you're working with, the more accurate and useful the estimate becomes. Quick phone shots are perfect — don't worry about making it look good.\n\nWe'll keep everything conversational. No forms, no pressure.\n\nIf you'd rather talk to John directly, text him at **(702) 324-7949** — he responds personally.\n\nSo — what are you thinking about remodeling?",
 };
 
 const PROGRESS_STEPS = [
