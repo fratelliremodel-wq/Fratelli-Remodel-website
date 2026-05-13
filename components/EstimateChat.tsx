@@ -129,6 +129,7 @@ export default function EstimateChat() {
   const [isRecording, setIsRecording] = useState(false);
   const [speechInputSupported, setSpeechInputSupported] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUnlockedRef = useRef(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
 
@@ -152,25 +153,47 @@ export default function EstimateChat() {
     );
   }, []);
 
-  // Cleanup on unmount
+  // Create a persistent audio element so iOS unlock carries over to playback
   useEffect(() => {
+    const audio = new Audio();
+    audio.preload = "none";
+    audioRef.current = audio;
     return () => {
-      stopAudio();
+      audio.pause();
+      audio.src = "";
+      audioRef.current = null;
       recognitionRef.current?.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ─── Audio (voice output) ────────────────────────────────────────────────
 
   function stopAudio() {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = "";
-      audioRef.current = null;
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+      audio.src = "";
     }
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     setIsPlaying(false);
+  }
+
+  /**
+   * Called inside a user-gesture handler (sendMessage / toggleRecording).
+   * Plays a silent clip on the persistent audio element so iOS marks it
+   * as "user-activated" — subsequent async .play() calls then succeed.
+   */
+  function unlockAudio() {
+    if (audioUnlockedRef.current || !audioRef.current) return;
+    // Minimal valid silent WAV (44 bytes, 0 samples)
+    audioRef.current.src =
+      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
+    audioRef.current.play().then(() => {
+      if (audioRef.current) audioRef.current.src = "";
+      audioUnlockedRef.current = true;
+    }).catch(() => {
+      // Unlock failed — browser TTS fallback will handle it
+    });
   }
 
   function speakWithBrowserTTS(text: string) {
@@ -186,9 +209,10 @@ export default function EstimateChat() {
   }
 
   async function speakText(text: string) {
-    stopAudio();
     if (!voiceEnabledRef.current) return;
+    stopAudio();
     const cleaned = stripForSpeech(text);
+    const audio = audioRef.current;
     try {
       setIsPlaying(true);
       const res = await fetch("/api/speak", {
@@ -197,22 +221,20 @@ export default function EstimateChat() {
         body: JSON.stringify({ text: cleaned }),
       });
       if (!res.ok) {
-        // ElevenLabs unavailable — fall back to browser TTS
         speakWithBrowserTTS(cleaned);
         return;
       }
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audioRef.current = audio;
+      if (!audio) { URL.revokeObjectURL(url); setIsPlaying(false); return; }
+      audio.src = url;
       audio.onended = () => {
         setIsPlaying(false);
         URL.revokeObjectURL(url);
-        audioRef.current = null;
       };
       audio.onerror = () => {
         setIsPlaying(false);
-        audioRef.current = null;
+        URL.revokeObjectURL(url);
       };
       await audio.play();
     } catch {
@@ -228,6 +250,7 @@ export default function EstimateChat() {
   // ─── Speech recognition (voice input) ───────────────────────────────────
 
   function toggleRecording() {
+    unlockAudio(); // gesture context — safe to unlock here too
     if (isRecording) {
       recognitionRef.current?.stop();
     } else {
@@ -356,6 +379,9 @@ export default function EstimateChat() {
 
   const sendMessage = async () => {
     if (!canSend) return;
+
+    // Unlock audio on iOS — must happen synchronously inside the gesture handler
+    unlockAudio();
 
     // Stop recording if still active
     recognitionRef.current?.stop();
