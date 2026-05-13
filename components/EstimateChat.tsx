@@ -22,7 +22,7 @@ const WELCOME_MESSAGE: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi there! I'm Fratelli AI, here to help you get a rough sense of what your remodel might cost before you ever have to pick up the phone.\n\nI'll ask you a few questions about your project, and if you can share a photo, even better — John always says a picture is worth a thousand dollar signs. 😄\n\nPrefer to talk directly with John right now? Call or text **(702) 324-7949**. If he doesn't answer, he's likely hands-on with clients — texting is usually best and he responds personally.\n\nTo get started: **what are you thinking about remodeling?**",
+    "Hey — I'm Fratelli AI. I work with John at Fratelli Remodel, and I'm here to help you think through your project before you ever have to pick up the phone.\n\nWe'll keep it conversational — no forms, no pressure.\n\nIf you'd rather talk to John directly, you can text him at **(702) 324-7949**. He responds personally.\n\nSo — what are you thinking about remodeling?",
 };
 
 const PROGRESS_STEPS = [
@@ -59,18 +59,6 @@ function renderMarkdown(text: string): React.ReactNode {
       </span>
     ));
   });
-}
-
-/** Strip markdown and clean up text before sending to TTS */
-function stripForSpeech(text: string): string {
-  return text
-    .replace(/\*\*([^*]+)\*\*/g, "$1") // bold → plain
-    .replace(/\*/g, "")
-    .replace(/\(702\) 324-7949/g, "seven oh two, three two four, seventy nine forty nine")
-    .replace(/😄|😊|🙂/g, "")
-    .replace(/\n+/g, " ")
-    .replace(/\s{2,}/g, " ")
-    .trim();
 }
 
 interface PendingImage {
@@ -123,13 +111,9 @@ export default function EstimateChat() {
   const [pendingImages, setPendingImages] = useState<PendingImage[]>([]);
   const [conversationId] = useState<string | null>(null);
 
-  // Voice state
-  const [voiceEnabled, setVoiceEnabled] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // Voice input state
   const [isRecording, setIsRecording] = useState(false);
   const [speechInputSupported, setSpeechInputSupported] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioUnlockedRef = useRef(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
 
@@ -138,13 +122,6 @@ export default function EstimateChat() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
-  const voiceEnabledRef = useRef(voiceEnabled);
-
-  // Keep ref in sync so closures inside sendMessage see the current value
-  useEffect(() => {
-    voiceEnabledRef.current = voiceEnabled;
-  }, [voiceEnabled]);
-
   // Detect browser speech recognition support
   useEffect(() => {
     setSpeechInputSupported(
@@ -153,104 +130,16 @@ export default function EstimateChat() {
     );
   }, []);
 
-  // Create a persistent audio element so iOS unlock carries over to playback
+  // Cleanup on unmount
   useEffect(() => {
-    const audio = new Audio();
-    audio.preload = "none";
-    audioRef.current = audio;
     return () => {
-      audio.pause();
-      audio.src = "";
-      audioRef.current = null;
       recognitionRef.current?.stop();
     };
   }, []);
 
-  // ─── Audio (voice output) ────────────────────────────────────────────────
-
-  function stopAudio() {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.pause();
-      audio.src = "";
-    }
-    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-    setIsPlaying(false);
-  }
-
-  /**
-   * Called inside a user-gesture handler (sendMessage / toggleRecording).
-   * Plays a silent clip on the persistent audio element so iOS marks it
-   * as "user-activated" — subsequent async .play() calls then succeed.
-   */
-  function unlockAudio() {
-    if (audioUnlockedRef.current || !audioRef.current) return;
-    // Minimal valid silent WAV (44 bytes, 0 samples)
-    audioRef.current.src =
-      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
-    audioRef.current.play().then(() => {
-      if (audioRef.current) audioRef.current.src = "";
-      audioUnlockedRef.current = true;
-    }).catch(() => {
-      // Unlock failed — browser TTS fallback will handle it
-    });
-  }
-
-  function speakWithBrowserTTS(text: string) {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.rate = 0.95;
-    utt.pitch = 1;
-    utt.onend = () => setIsPlaying(false);
-    utt.onerror = () => setIsPlaying(false);
-    setIsPlaying(true);
-    window.speechSynthesis.speak(utt);
-  }
-
-  async function speakText(text: string) {
-    if (!voiceEnabledRef.current) return;
-    stopAudio();
-    const cleaned = stripForSpeech(text);
-    const audio = audioRef.current;
-    try {
-      setIsPlaying(true);
-      const res = await fetch("/api/speak", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: cleaned }),
-      });
-      if (!res.ok) {
-        speakWithBrowserTTS(cleaned);
-        return;
-      }
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      if (!audio) { URL.revokeObjectURL(url); setIsPlaying(false); return; }
-      audio.src = url;
-      audio.onended = () => {
-        setIsPlaying(false);
-        URL.revokeObjectURL(url);
-      };
-      audio.onerror = () => {
-        setIsPlaying(false);
-        URL.revokeObjectURL(url);
-      };
-      await audio.play();
-    } catch {
-      setIsPlaying(false);
-    }
-  }
-
-  function toggleVoice() {
-    if (voiceEnabled) stopAudio();
-    setVoiceEnabled((v) => !v);
-  }
-
   // ─── Speech recognition (voice input) ───────────────────────────────────
 
   function toggleRecording() {
-    unlockAudio(); // gesture context — safe to unlock here too
     if (isRecording) {
       recognitionRef.current?.stop();
     } else {
@@ -262,7 +151,6 @@ export default function EstimateChat() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
-    stopAudio(); // stop speaking before listening
 
     const recognition = new SR();
     recognition.continuous = false;
@@ -380,9 +268,6 @@ export default function EstimateChat() {
   const sendMessage = async () => {
     if (!canSend) return;
 
-    // Unlock audio on iOS — must happen synchronously inside the gesture handler
-    unlockAudio();
-
     // Stop recording if still active
     recognitionRef.current?.stop();
     setIsRecording(false);
@@ -464,11 +349,6 @@ export default function EstimateChat() {
 
       if (rafId) cancelAnimationFrame(rafId);
       flush();
-
-      // Speak the completed response
-      if (accumulated.trim()) {
-        speakText(accumulated);
-      }
     } catch (err) {
       console.error("Send error:", err);
       setMessages((prev) =>
@@ -496,7 +376,6 @@ export default function EstimateChat() {
 
   const progressStep = estimateProgress(messages);
   const progressPct = Math.round((progressStep / (PROGRESS_STEPS.length - 1)) * 100);
-  const lastAssistantId = [...messages].reverse().find((m) => m.role === "assistant")?.id;
 
   // ─── Render ──────────────────────────────────────────────────────────────
 
@@ -509,47 +388,7 @@ export default function EstimateChat() {
           <span className="text-[#8B6F47] text-xs tracking-[0.2em] uppercase font-medium">
             Project Assessment
           </span>
-          <div className="flex items-center gap-3">
-            {/* Stop speaking button */}
-            {isPlaying && (
-              <button
-                onClick={stopAudio}
-                title="Stop speaking"
-                className="text-[#8B6F47] hover:text-[#7A6040] transition-colors"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                </svg>
-              </button>
-            )}
-
-            {/* Voice on/off toggle */}
-            <button
-              onClick={toggleVoice}
-              title={voiceEnabled ? "Mute voice responses" : "Enable voice responses"}
-              className={`transition-colors ${
-                voiceEnabled
-                  ? "text-[#8B6F47] hover:text-[#7A6040]"
-                  : "text-[#C4A882] hover:text-[#8B6F47]"
-              }`}
-            >
-              {voiceEnabled ? (
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                </svg>
-              ) : (
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <line x1="23" y1="9" x2="17" y2="15" />
-                  <line x1="17" y1="9" x2="23" y2="15" />
-                </svg>
-              )}
-            </button>
-
-            <span className="text-[#9A9A9A] text-xs">{PROGRESS_STEPS[progressStep]}</span>
-          </div>
+          <span className="text-[#9A9A9A] text-xs">{PROGRESS_STEPS[progressStep]}</span>
         </div>
         <div className="h-1 rounded-full bg-[#E5DDD4] overflow-hidden">
           <div
@@ -565,22 +404,13 @@ export default function EstimateChat() {
         className="flex-1 overflow-y-auto px-6 py-4 space-y-5"
       >
         {messages.map((msg) => {
-          const isSpeakingThis =
-            isPlaying && msg.id === lastAssistantId && msg.role === "assistant";
-
           return (
             <div
               key={msg.id}
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-3`}
             >
               {msg.role === "assistant" && (
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full bg-[#8B6F47] flex items-center justify-center mt-0.5 transition-all duration-300 ${
-                    isSpeakingThis
-                      ? "ring-2 ring-[#8B6F47]/40 ring-offset-2 animate-pulse"
-                      : ""
-                  }`}
-                >
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#8B6F47] flex items-center justify-center mt-0.5">
                   <span className="text-white text-xs font-bold font-[family-name:var(--font-playfair)]">
                     F
                   </span>
