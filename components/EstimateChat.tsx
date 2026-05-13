@@ -169,21 +169,36 @@ export default function EstimateChat() {
       audioRef.current.src = "";
       audioRef.current = null;
     }
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     setIsPlaying(false);
+  }
+
+  function speakWithBrowserTTS(text: string) {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.rate = 0.95;
+    utt.pitch = 1;
+    utt.onend = () => setIsPlaying(false);
+    utt.onerror = () => setIsPlaying(false);
+    setIsPlaying(true);
+    window.speechSynthesis.speak(utt);
   }
 
   async function speakText(text: string) {
     stopAudio();
     if (!voiceEnabledRef.current) return;
+    const cleaned = stripForSpeech(text);
     try {
       setIsPlaying(true);
       const res = await fetch("/api/speak", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: stripForSpeech(text) }),
+        body: JSON.stringify({ text: cleaned }),
       });
       if (!res.ok) {
-        setIsPlaying(false);
+        // ElevenLabs unavailable — fall back to browser TTS
+        speakWithBrowserTTS(cleaned);
         return;
       }
       const blob = await res.blob();
