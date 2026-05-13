@@ -1,9 +1,8 @@
 import { NextRequest } from "next/server";
 
-// "Aria" — ElevenLabs' newest generation, warm American female.
-// Sounds natural and conversational, not robotic.
+// "Sarah" — Mature, Reassuring, Confident. Warm and natural, not robotic.
 // Override by setting ELEVENLABS_VOICE_ID in Vercel env vars.
-const VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? "9BWtsMINqrJLrRacOk9x";
+const VOICE_ID = process.env.ELEVENLABS_VOICE_ID ?? "EXAVITQu4vr4xnSDxMaL";
 
 // eleven_multilingual_v2 = highest quality, most natural-sounding model.
 // Slower than turbo but the difference is audible — worth it for this use case.
