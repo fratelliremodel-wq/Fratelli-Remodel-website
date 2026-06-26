@@ -1,16 +1,16 @@
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
 
       <style>{`
         .hero-bg {
           background-size: cover;
-          background-position: 45% 15%;
+          background-position: 45% 20%;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
           .hero-bg {
-            background-size: 115%;
-            background-position: 27% 18%;
+            background-size: 110%;
+            background-position: 30% 18%;
           }
         }
       `}</style>
@@ -25,45 +25,72 @@ export default function Hero() {
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/58" />
+      <div className="absolute inset-0 bg-black/62" />
 
-      {/* Warm bronze tint layer — keeps brand feel */}
+      {/* Warm bronze tint */}
       <div
-        className="absolute inset-0 opacity-25"
+        className="absolute inset-0 opacity-20"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, #3D2010 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 30% 50%, #3D2010 0%, transparent 70%)",
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center pt-32 pb-40">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-24 lg:pt-0 lg:pb-0 lg:min-h-screen lg:flex lg:items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
 
-        {/* Main headline */}
-        <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-6">
-          Remodeling Done Right
-          <span className="block text-[#C4A882] mt-2">in Las Vegas.</span>
-        </h1>
+          {/* Left — headline + CTA */}
+          <div>
+            <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] tracking-tight mb-6">
+              Remodeling Done Right
+              <span className="block text-[#C4A882] mt-2">in Las Vegas.</span>
+            </h1>
 
-        {/* Subheadline */}
-        <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10">
-          Licensed. Insured. Trusted. We help homeowners remodel with confidence
-          through clear communication and quality craftsmanship.
-        </p>
+            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+              Licensed. Insured. Trusted. We help homeowners remodel with
+              confidence through clear communication and quality craftsmanship.
+            </p>
 
-        {/* Primary CTA */}
-        <a
-          href="#contact"
-          className="inline-block px-10 py-4 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors font-medium"
-        >
-          Start the Conversation
-        </a>
+            <a
+              href="#contact"
+              className="inline-block px-10 py-4 bg-[#8B6F47] text-white text-sm tracking-wide rounded hover:bg-[#7A6040] transition-colors font-medium"
+            >
+              Start the Conversation
+            </a>
 
-        {/* No pressure line */}
-        <p className="text-white/35 text-sm mt-4 tracking-wide">
-          No pressure — just a conversation about your project.
-        </p>
+            <p className="text-white/35 text-sm mt-4 tracking-wide">
+              No pressure — just a conversation about your project.
+            </p>
+          </div>
 
+          {/* Right — intro video */}
+          <div className="flex flex-col items-center lg:items-end">
+            <p className="text-white/40 text-[11px] tracking-[0.25em] uppercase mb-3 self-center lg:self-end lg:mr-1">
+              Meet John
+            </p>
+
+            {/* Phone-style video frame */}
+            <div className="relative w-full max-w-[280px] lg:max-w-[300px]">
+              {/* Subtle glow behind the video */}
+              <div
+                className="absolute inset-0 rounded-[2rem] blur-2xl opacity-20 scale-95"
+                style={{ background: "#8B6F47" }}
+              />
+
+              <div className="relative aspect-[9/16] rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl">
+                <iframe
+                  src="https://www.youtube.com/embed/JWipcDW1kwc?rel=0&modestbranding=1&color=white"
+                  title="Meet John — Fratelli Remodel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* Scroll indicator */}
